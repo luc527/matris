@@ -1,0 +1,22 @@
+table#game-matrix-table {
+	background-color: lightslategrey;
+}
+
+table#game-matrix-table * {
+	font-family: Consolas, monospace;
+	font-size: 16pt;
+	font-weight: bold;
+	color: rgba(0,0,0,0.7);
+}
+
+td.game-matrix-cell {
+	border: 1px solid slategrey;
+	width: 36px;
+	height: 36px;
+	text-align: center;
+}
+
+
+td.game-matrix-cell.empty { background-color: lightgrey; }
+td.game-matrix-cell.number { background-color: lightskyblue; }
+td.game-matrix-cell.comparision { background-color: lightcoral; }

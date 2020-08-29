@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mathexpris</title> <!-- MATHematical EXPRession tetrIS -->
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<main>
+		<div id="game-container"></div>
+	</main>
+
+	<script>
+		// Setting debug to true will make the methods output console logs on what they're doing
+		const debug = true;
+		function debugXYobj(obj) {
+			return `[y:${obj.y}, x:${obj.x}]`;
+		}
+	</script>
+
+	<script src="helpers.js"></script>
+	<script src="block-logic.js"></script>
+	<script src="GameMatrix.js"></script>
+	<script src="GameState.js"></script>
+	<script>
+
+		let state = new GameState(10, 10);
+		let gameContainer = document.querySelector('#game-container');
+
+		function render() {
+			gameContainer.innerHTML = state.matrix.HTMLrendering();
+		}
+
+		state.matrix.setBlock({y:0,x:0},'9');
+		state.matrix.setBlock({y:0,x:1},'=');
+		state.matrix.setBlock({y:0,x:2},'3');
+		render();
+	</script>
+</body>
+</html>
