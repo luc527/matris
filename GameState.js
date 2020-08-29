@@ -20,6 +20,7 @@ class GameState {
 
 	constructor(height, width) {
 		this.matrix = new GameMatrix(height, width);
+		/* movingBlock: position of the block currently guided by the player */
 		this.movingBlock = { x:null, y:null }; 
 		this.listeningInput = false;
 		this.gameOver = false;
@@ -117,10 +118,10 @@ class GameState {
 	}
 
 
-	/* movingBlockSettledRoutine: does what is necessary to do
-	   once the block guided by the player settled: evaluate
-	   and update it until the game can continue, in which case
-	   a new block is created, or the player loses */
+	/* movingBlockSettledRoutine: does what is necessary
+	   once the block guided by the player is settled: evaluate
+	   and update the matrix until the game can continue by
+	   creating a new block */
 	movingBlockSettledRoutine() {
 		this.listeningInput = false;
 
