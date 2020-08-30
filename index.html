@@ -14,20 +14,29 @@
 
 	<script src="helpers.js"></script>
 	<script src="block-logic.js"></script>
-	<script src="GameMatrix.js"></script>
-	<script src="GameState.js"></script>
+	<script src="Matrix.js"></script>
+	<script src="Game.js"></script>
 	<script>
-
-		let state = new GameState(10, 10);
+		let game = new Game(11, 10);
 		let gameContainer = document.querySelector('#game-container');
 
+		/* TODO: move rendering from Matrix.js
+		 * to Game.js, so it can display game over,
+		 * highlight the top row to indicate it's game over if a block gets there
+		 * (which is a concern of the game, not of the matrix) */
+
 		function render() {
-			gameContainer.innerHTML = state.matrix.HTMLrendering();
+			gameContainer.innerHTML = game.matrix.HTMLrendering();
 		}
 
-		state.matrix.setBlock({y:0,x:0},'9');
-		state.matrix.setBlock({y:0,x:1},'=');
-		state.matrix.setBlock({y:0,x:2},'3');
+		function play(input) {
+			game.handleInput(input);
+			render();
+		}
+
+		game.matrix.setBlock({y:0,x:0},'9');
+		game.matrix.setBlock({y:0,x:1},'=');
+		game.matrix.setBlock({y:0,x:2},'3');
 		render();
 	</script>
 </body>

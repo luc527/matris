@@ -2,7 +2,7 @@
    block-logic.js (in HTMLrendering())
 */
 
-class GameMatrix {
+class Matrix {
 
 	constructor(height, width) {
 		this.height = height;
@@ -11,9 +11,8 @@ class GameMatrix {
 	}
 
 
-	/* _initializeMatrix: sets matrix[i][j] = ' '
-	   for i=0..height
-	   and j=0..width */
+	/* initializeMatrix: sets matrix[i][j] = ' '
+	   for i=0..height and j=0..width */
 	initializeMatrix() {
 		this.matrix = new Array(this.height);
 		for (let i = 0; i < this.height; i++) {
@@ -24,9 +23,9 @@ class GameMatrix {
 	}
 
 
-	/* isValidPosition: returns whether the given position
+	/* isValid: returns whether the given position
 	   is within the bounds of the matrix */
-	isValidPosition(position) {
+	isValid(position) {
 		return position.x >= 0 && position.x < this.width
 		    && position.y >= 0 && position.y < this.height;
 	}
@@ -35,14 +34,14 @@ class GameMatrix {
 	/* getBlock: returns block at the given position in the matrix,
 	   or undefined if the given position is invalid */
 	getBlock(position) {
-		if (this.isValidPosition(position))
+		if (this.isValid(position))
 			return this.matrix[position.y][position.x];
 	}
 
 
 	/* isAvailablePosition: returns whether the given position
 	   is valid AND is available (not occupied) */
-	isAvailablePosition(position) {
+	isAvailable(position) {
 		return this.getBlock(position) == ' ';
 	}
 
@@ -50,7 +49,7 @@ class GameMatrix {
 	/* setBlock: sets the given position in the matrix
 	   to the given block, if possible */
 	setBlock(position, block) {
-		if (this.isValidPosition(position))
+		if (this.isValid(position))
 			this.matrix[position.y][position.x] = block;
 	}
 
@@ -60,8 +59,8 @@ class GameMatrix {
 	   - if the movement was possible, same as 'newPosition';
 	   - otherwise, same as 'oldPosition'. (like a multiplexer) */
 	moveBlock(oldPosition, newPosition) {
-		const canMove = this.isValidPosition(oldPosition)
-		             && this.isAvailablePosition(newPosition);
+		const canMove = this.isValid(oldPosition)
+		             && this.isAvailable(newPosition);
 		if (canMove) {
 			this.setBlock(newPosition, this.getBlock(oldPosition));
 			this.setBlock(oldPosition, ' ');
@@ -73,7 +72,7 @@ class GameMatrix {
 
 
 	/* HTMLrendering: returns a rendering of the matrix as an HTML table.
-	   styling is defered, as only the css classes are provided */
+	 * styling is defered, as only the css classes are provided */
 	HTMLrendering() {
 		let html = '';
 		let block;
