@@ -101,17 +101,39 @@ class Game {
 
 
 	update(input) {
-		if (this.isGameOver())
-			return;
+		if (this.isGameOver()) return;
 
 		this.updatePlayerBlock(input);
 
-		if (this.isGameOver())
-			return;
+		if (this.isGameOver()) return;
 		if (this.isPlayerBlockSettled()) {
 			//calls some evaluation function, adds score etc.
 			this.createNewPlayerBlock();
 		}
 	}
 
+
+	/* HTMLrendering: returns a rendering of the matrix as an HTML table.
+	 * styling is defered, as only the css classes are provided */
+	HTMLrendering() {
+		let html = '';
+		let block;
+		let danger; //to make the top row red, indicating game over
+		html += '<table id="game-table">';
+		for (let y = this.matrix.height-1; y >= 0; y--) {
+			danger = y == this.matrix.height-1 ? 'danger' : '';
+			html += '<tr class="game-row">';
+			for (let x = 0; x < this.matrix.width; x++) {
+				block = this.matrix.getBlock({y, x});
+				html += `<td class="game-cell ${danger} ${getType(block)}">`;
+				html += block;
+				html += '</td>';
+			}
+			html += '</tr>';
+		}
+		html += '</table>';
+		if (this.isGameOver())
+			html += '<p id="game-over">Game over!</h1>'
+		return html;
+	}
 }
