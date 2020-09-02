@@ -12,7 +12,7 @@ class Matrix {
 
 
 	/* initializeMatrix: sets matrix[i][j] = ' '
-	   for i=0..height and j=0..width */
+	 * for i=0..height and j=0..width */
 	initializeMatrix() {
 		this.matrix = new Array(this.height);
 		for (let i = 0; i < this.height; i++) {
@@ -24,7 +24,7 @@ class Matrix {
 
 
 	/* isValid: returns whether the given position
-	   is within the bounds of the matrix */
+	 * is within the bounds of the matrix */
 	isValid(position) {
 		return position.x >= 0 && position.x < this.width
 		    && position.y >= 0 && position.y < this.height;
@@ -32,7 +32,7 @@ class Matrix {
 
 
 	/* getBlock: returns block at the given position in the matrix,
-	   or undefined if the given position is invalid */
+	 * or undefined if the given position is invalid */
 	getBlock(position) {
 		if (this.isValid(position))
 			return this.matrix[position.y][position.x];
@@ -40,14 +40,14 @@ class Matrix {
 
 
 	/* isAvailablePosition: returns whether the given position
-	   is valid AND is available (not occupied) */
+	 * is valid AND is available (not occupied) */
 	isAvailable(position) {
 		return this.getBlock(position) == ' ';
 	}
 
 
 	/* setBlock: sets the given position in the matrix
-	   to the given block, if possible */
+	 * to the given block, if possible */
 	setBlock(position, block) {
 		if (this.isValid(position))
 			this.matrix[position.y][position.x] = block;
@@ -55,9 +55,9 @@ class Matrix {
 
 
 	/* moveBlock: moves block from 'oldPosition' to 'newPosition', if possible.
-	   returns the resulting position:
-	   - if the movement was possible, same as 'newPosition';
-	   - otherwise, same as 'oldPosition'. (like a multiplexer) */
+	 * returns the resulting position:
+	 * - if the movement was possible, same as 'newPosition';
+	 * - otherwise, same as 'oldPosition'. (like a multiplexer) */
 	moveBlock(oldPosition, newPosition) {
 		const canMove = this.isValid(oldPosition)
 		             && this.isAvailable(newPosition);

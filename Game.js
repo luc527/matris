@@ -19,9 +19,8 @@ class Game {
 		this.listeningInput = false;
 		this.gameOver = false;
 
-		/* playerBlock: points to the block
-		 * currently guided by the player in the matrix */
-		this.playerBlock = { x:null, y:null }; 
+		/* playerBlock: points to the block guided by the player in the matrix */
+		this.playerBlock = { x:null, y:null };
 
 		this.newBlockRoutine();
 	}
@@ -38,23 +37,24 @@ class Game {
 
 
 	gameOverRoutine() {
+		this.listeningInput = false;
 		this.gameOver = true;
 		console.log('Game over!')
 	}
 
+
 	/* newBlockRoutine: creates a new block on the top,
-	 * enables player to control it by turning on listeningInput */
+	 * enables player to control it */
 	newBlockRoutine() {
 		this.playerBlock = this.newPlayerBlock();
 		this.matrix.setBlock(this.playerBlock, randomBlock());
 		this.listeningInput = true;
 	}
 
-	/* handleInput: handles user input, assuming it matches what
-	 * updatePlayerBlock uses as direction for the block.
-	 * Basically calls updatePlayerBlock or not depending on whether
-	 * listeningInput is turned on or off. */
+
 	handleInput(input) {
+		/* Assumes the input matches what updatePlayerBlock
+		 * uses to indicate a direction for the block. */
 		if (this.listeningInput)
 			this.updatePlayerBlock(input);
 	}
@@ -64,7 +64,7 @@ class Game {
 	 * the player is guiding, according to the given direction. */
 	updatedPosition(direction) {
 		/* Horizontally, the player can go left, right or stay.
-		 * But the block tries to also go down when possible. */
+		 * Then the block tries to also go down if possible. */
 
 		const xMovement = directionToXOffset[direction];
 		let original, belowOriginal, updated, belowUpdated;
@@ -89,7 +89,7 @@ class Game {
 		/* First tries to move horizontally and down,
 		 * if it can't, then tries to move just horizontally,
 		 * if it can't, then tries to move just down,
-		 * if it can't, then doesn't move at all */
+		 * if it can't, then doesn't move at all (returns the original position) */
 		if (this.matrix.isAvailable(belowUpdated)) return belowUpdated;
 		else if (this.matrix.isAvailable(updated)) return updated;
 		else if (this.matrix.isAvailable(belowOriginal)) return belowOriginal;
@@ -99,27 +99,32 @@ class Game {
 
 	/* updatePlayerBlock: moves, according to the given direction,
 	 * the block the player is currently guiding.
-	 * Should be called only by handleInput().
+	 * Only handleInput() should call it.
 	 * Calls playerBlockSettledRoutine() when the block reached ground.
 	 * Possible game over if block settles on top row. */
 	updatePlayerBlock(direction) {
 		const updated = this.updatedPosition(direction);
 
-		//moves playerBock in matrix and updates its position here
+		//moves playerBlock in matrix and updates its position
 		this.playerBlock = this.matrix.moveBlock(this.playerBlock, updated);
 
-		if (this.playerBlock.y == this.matrix.height-1)
+		//checks for game over (block settled on top row)
+		if (this.playerBlock.y == this.matrix.height-1) {
 			this.gameOverRoutine();
+			return;
+		}
 
-		if (this.playerBlock.y == 0)
+		//checks for block reaching ground
+		if (this.playerBlock.y == 0) {
 			this.playerBlockSettledRoutine();
-
-		const blockBelow = this.matrix.getBlock({
-			y: this.playerBlock.y - 1,
-			x: this.playerBlock.x,
-		});
-		if (blockBelow != ' ') 
-			this.playerBlockSettledRoutine();
+		} else {
+			const blockBelow = this.matrix.getBlock({
+				y: this.playerBlock.y - 1,
+				x: this.playerBlock.x,
+			});
+			if (blockBelow != ' ')
+				this.playerBlockSettledRoutine();
+		}
 	}
 
 
