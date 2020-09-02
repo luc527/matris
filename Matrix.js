@@ -110,14 +110,3 @@ class Matrix {
 	}
 
 }
-
-
-/* unused (yet?) method ideas:
-
-getLine() and getColumn()
-  both return an array of the line/column
-interchangeBlocks()
-  a more general moveBlocks (which interchanges a block with ' ')
-  worthless if it's only used by moveBlocks
-...
-*/

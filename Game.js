@@ -30,11 +30,15 @@ class Game {
 		};
 		return !this.matrix.isAvailable(blockBelow);
 	}
-	
+
 
 	isGameOver() {
-		const lastRow = this.matrix.getRow(this.matrix.height-1);
-		return lastRow.some(cell => cell != ' ');
+		const y = this.matrix.height - 1;
+		for (let x = 0; x < this.matrix.width; x++)
+			if (!this.matrix.isAvailable({x, y})
+			 && !this.matrix.isAvailable({x, y:y-1})) //game over: block settled on top row
+			 	return true;
+		return false;
 	}
 
 
@@ -77,7 +81,7 @@ class Game {
 		/* first tries to move horizontally and down.
 		 * if it can't, then tries to move just horizontally.
 		 * if it can't, then tries to move just down.
-		 * if it can't, then doesn't move at all, returning the original position. */
+		 * if it can't, then doesn't move at all */
 		if (this.matrix.isAvailable(horizontalDown))
 			updated = horizontalDown;
 		else if (this.matrix.isAvailable(horizontal))
@@ -86,9 +90,28 @@ class Game {
 			updated = down;
 		else
 			updated = original;
-
 		/* moves the block in the matrix and updates this.playerBlock to point to it */
 		this.playerBlock = this.matrix.moveBlock(this.playerBlock, updated);
+	}
+
+
+	start() {
+		this.createNewPlayerBlock();
+	}
+
+
+	update(input) {
+		if (this.isGameOver())
+			return;
+
+		this.updatePlayerBlock(input);
+
+		if (this.isGameOver())
+			return;
+		if (this.isPlayerBlockSettled()) {
+			//calls some evaluation function, adds score etc.
+			this.createNewPlayerBlock();
+		}
 	}
 
 }
