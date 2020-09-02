@@ -7,6 +7,7 @@ class Matrix {
 	constructor(height, width) {
 		this.height = height;
 		this.width = width;
+		this.matrix = null;
 		this.initializeMatrix();
 	}
 
@@ -20,6 +21,23 @@ class Matrix {
 			for (let j = 0; j < this.width; j++)
 				this.matrix[i][j] = ' ';
 		}
+	}
+
+
+	getRow(rowNumber) {
+		if (rowNumber < 0 || rowNumber >= this.height)
+			return [];
+		return this.matrix[rowNumber];
+	}
+
+
+	getCol(colNumber) {
+		if (colNumber < 0 || colNumber >= this.width)
+			return [];
+		let col = [];
+		for (const row of this.matrix)
+			col.push(row[colNumber]);
+		return col;
 	}
 
 

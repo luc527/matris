@@ -16,21 +16,23 @@
 	<script src="block-logic.js"></script>
 	<script src="Matrix.js"></script>
 	<script src="Game.js"></script>
+	<script src="Controller.js"></script>
 	<script>
-		let game = new Game(11, 10);
-		let gameContainer = document.querySelector('#game-container');
-
 		/* TODO: move rendering from Matrix.js
 		 * to Game.js, so it can display game over,
 		 * highlight the top row to indicate it's game over if a block gets there
 		 * (which is a concern of the game, not of the matrix) */
+		let game = new Game(11, 10);
+		let controller = new Controller(game);
+		let gameContainer = document.querySelector('#game-container');
+
 
 		function render() {
 			gameContainer.innerHTML = game.matrix.HTMLrendering();
 		}
 
 		function play(input) {
-			game.handleInput(input);
+			controller.updateGame(input);
 			render();
 		}
 
