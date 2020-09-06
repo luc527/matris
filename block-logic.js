@@ -22,5 +22,7 @@ function getType(block) {
 }
 
 function randomBlock() {
-	return blocks[randomIntBetween(0, blocks.length)];
+	const comparision = Math.random() <= 0.5;
+	if (comparision) return comparisions[randomIntBetween(0, comparisions.length)];
+	else return numbers[randomIntBetween(0, numbers.length)];
 }
