@@ -1,5 +1,5 @@
 /* dependencies:
-   helpers.js (in randomBlock())
+   helpers.js (in randomBlock)
 */
 
 const numbers = ['1','2','3','4','5','6','7','8','9','0'];
@@ -21,8 +21,8 @@ function getType(block) {
 	return 'invalid';
 }
 
+
 function randomBlock() {
-	const comparision = Math.random() <= 0.5;
-	if (comparision) return comparisions[randomIntBetween(0, comparisions.length)];
-	else return numbers[randomIntBetween(0, numbers.length)];
+	/* 50/50 chance of comparision or number */
+	return randomElement(Math.random() <= 0.5 ? comparisions : numbers);
 }
