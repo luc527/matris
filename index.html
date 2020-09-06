@@ -20,7 +20,6 @@
 		let game = new Game(11, 10);
 		let gameContainer = document.querySelector('#game-container');
 
-
 		function render() {
 			gameContainer.innerHTML = game.HTMLrendering();
 		}
@@ -29,6 +28,10 @@
 			game.update(input);
 			render();
 		}
+
+		document.addEventListener('keydown', function (event) {
+			play(event.code);
+		});
 
 		game.start();
 		render();

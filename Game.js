@@ -6,9 +6,9 @@
 
 /* should be updated to match what the keyboard listener returns */
 const directionToXOffset = {
-	'<': -1,
-	'>':  1,
-	'v':  0,
+	ArrowLeft:  -1,
+	ArrowRight:  1,
+	ArrowDown:   0,
 };
 
 
@@ -17,7 +17,7 @@ class Game {
 	constructor(height, width) {
 		this.matrix = new Matrix(height, width);
 		this.playerBlock = { x:null, y:null };
-		/* playerBlock: points the block currently guided by the player * in the matrix */
+		/* playerBlock: points the block currently guided by the player in the matrix */
 	}
 
 
@@ -34,16 +34,18 @@ class Game {
 
 	isGameOver() {
 		const y = this.matrix.height - 1;
-		for (let x = 0; x < this.matrix.width; x++)
-			if (!this.matrix.isAvailable({x, y})
-			 && !this.matrix.isAvailable({x, y:y-1})) //game over: block settled on top row
-			 	return true;
+		for (let x = 0; x < this.matrix.width; x++) {
+			const settled = !this.matrix.isAvailable({x, y})
+			             && !this.matrix.isAvailable({x, y:y-1});
+			if (settled)
+				return true;
+		}
 		return false;
 	}
 
 
 	/* createNewPlayerBlock: instantiates a new block on the top
-	 * of the matrix, which this.playerBlock will point to it */
+	 * of the matrix, which this.playerBlock will point to */
 	createNewPlayerBlock() {
 		this.playerBlock = {
 			y: this.matrix.height - 1,
@@ -51,6 +53,7 @@ class Game {
 		};
 		this.matrix.setBlock(this.playerBlock, randomBlock());
 	}
+
 
 	/* updatePlayerBlock: moves the playerBlock according
 	 * to the given direction */
@@ -90,6 +93,7 @@ class Game {
 			updated = down;
 		else
 			updated = original;
+
 		/* moves the block in the matrix and updates this.playerBlock to point to it */
 		this.playerBlock = this.matrix.moveBlock(this.playerBlock, updated);
 	}
@@ -101,12 +105,11 @@ class Game {
 
 
 	update(input) {
-		if (this.isGameOver()) return;
+		if (this.isGameOver())
+			return;
 
 		this.updatePlayerBlock(input);
-
-		if (this.isGameOver()) return;
-		if (this.isPlayerBlockSettled()) {
+		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
 			//calls some evaluation function, adds score etc.
 			this.createNewPlayerBlock();
 		}
