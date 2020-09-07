@@ -1,0 +1,286 @@
+/* 
+  CSS Reset
+  http://meyerweb.com/eric/tools/css/reset/ 
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol,
+ul {
+	list-style: none;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: "";
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Variables */
+
+:root {
+	/* Colors */
+	--color-primary: #7f5af0;
+	--color-green: #2cb67d;
+	--color-white: #eff0f3;
+	--color-red: #d9376e;
+	--color-light-grey: rgba(114, 117, 126, 0.2);
+	--color-black: #010101;
+
+	/* Fonts */
+	--font-default: "IBM Plex Mono", monospace;
+}
+
+body {
+	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
+	width: 100vw;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	font-family: var(--font-default);
+	background-color: var(--color-white);
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 32px;
+}
+
+footer {
+	width: 380px;
+	display: flex;
+	margin-top: 32px;
+	justify-content: space-between;
+}
+
+button {
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin: 0;
+	transition: all 0.3s ease;
+	font-family: var(--font-default);
+}
+
+button:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+main {
+	width: min-content;
+	justify-self: center;
+}
+
+table {
+	display: flex;
+}
+
+table#game-table * {
+	font-size: 16px;
+	letter-spacing: 0;
+	font-weight: bold;
+}
+
+tr {
+	display: flex;
+}
+
+tr td {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--color-light-grey);
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	border-collapse: collapse;
+	color: var(--color-white);
+}
+
+tr td.game-cell.empty.danger {
+	background-color: var(--color-red);
+}
+tr td.game-cell.empty {
+	background-color: var(--color-white);
+}
+tr td.game-cell.number {
+	background-color: var(--color-primary);
+}
+tr td.game-cell.comparision {
+	background-color: var(--color-green);
+}
+
+p#game-over {
+	margin-top: 32px;
+	text-align: center;
+	color: var(--color-primary);
+	font-weight: bold;
+	font-size: 32px;
+}
+
+/* Modal */
+
+.modal {
+	position: absolute;
+	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
+	width: 100vw;
+
+	z-index: 100;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(1, 1, 1, 0.5);
+}
+
+.modal__container {
+	background-color: var(--color-white);
+	text-align: center;
+	width: 100vw;
+	max-width: 768px;
+	padding: 32px 0;
+}
+
+.modal__container h2 {
+	color: var(--color-primary);
+	text-transform: uppercase;
+	font-size: 36px;
+}
+
+.modal__container button {
+	background-color: var(--color-primary);
+	padding: 8px 16px;
+	color: var(--color-white);
+	text-transform: uppercase;
+	font-size: 36px;
+}
+
+.modal__container p {
+	margin: 32px 0;
+	font-size: 18px;
+}
