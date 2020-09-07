@@ -21,7 +21,6 @@ function getType(block) {
 	return 'invalid';
 }
 
-
 function randomBlock() {
 	/* 50/50 chance of comparision or number */
 	return randomElement(Math.random() <= 0.5 ? comparisions : numbers);

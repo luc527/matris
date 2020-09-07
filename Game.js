@@ -4,7 +4,6 @@
  * block-logic.js (in createNewPlayerBlock)
  */
 
-/* should be updated to match what the keyboard listener returns */
 const directionToXOffset = {
 	ArrowLeft:  -1,
 	ArrowRight:  1,
