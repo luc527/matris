@@ -107,9 +107,9 @@
 		}
 
 		// Movement input from arrow keys
-		const movementInputs = ["ArrowLeft", "ArrowDown", "ArrowRight"];
+		const arrowKeys = ["ArrowLeft", "ArrowDown", "ArrowRight"];
 		document.addEventListener('keydown', function (event) {
-			if (movementInputs.includes(event.code))
+			if (arrowKeys.includes(event.code))
 				play(event.code);
 		});
 		
