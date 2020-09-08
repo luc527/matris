@@ -14,7 +14,7 @@
 <body>
 
 	<header>
-	<svg width="352" height="58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Matris Logo">
+	<svg viewBox="0 0 352 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Matris Logo">
 		<path
 			d="M154.775 47.645l-1.366-4.53h-15.226l-3.348 14.318h-12.117L137.704 0h7.813v12.489H156.095l11.435 35.156h-12.755zm-8.621-35.156h-.637l-5.421 21h11.479l-5.421-21z"
 			fill="#2CB67D" />
@@ -44,17 +44,17 @@
 
 	<footer>
 		<button type="button" title="Mover para esquerda" class="inputButton" data-code="ArrowLeft">
-			<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M3.81596e-07 32L64 7.63192e-07L64 64L3.81596e-07 32Z" fill="#7F5AF0" />
 			</svg>
 		</button>
 		<button type="button" title="Mover para baixo" class="inputButton" data-code="ArrowDown">
-			<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M32 64L-5.59506e-06 9.40975e-06L64 3.8147e-06L32 64Z" fill="#7F5AF0" />
 			</svg>
 		</button>
 		<button type="button" title="Mover para a direita" class="inputButton" data-code="ArrowRight">
-			<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M64 32L1.01717e-06 64L3.8147e-06 -2.79753e-06L64 32Z" fill="#7F5AF0" />
 			</svg>
 		</button>
@@ -69,53 +69,61 @@
 	</div>
 	
 	<script>
+
+    window.onload = () => {
+      setDocHeight(), init();
+    };
+
+    function init() {
+      let game = new Game(11, 10);
+      let gameContainer = document.querySelector('#game-container');
+
+      function render() {
+        gameContainer.innerHTML = game.HTMLrendering(gameOverModal);
+      }
+
+      // TODO: Better modal handling for game over 
+      let gameOverModal = document.querySelector('#game-over-modal');
+
+      function play(input) {
+        game.update(input);
+        render();
+      }
+
+      // Movement input from buttons
+      for (btn of document.querySelectorAll('.inputButton')) {
+        btn.onclick = function () {
+          play(this.dataset.code)
+        };
+      }
+
+      // Movement input from arrow keys
+      const arrowKeys = ["ArrowLeft", "ArrowDown", "ArrowRight"];
+      document.addEventListener('keyup', function (event) {
+        if (arrowKeys.includes(event.code))
+          play(event.code);
+      });
+
+      game.start();
+      render();
+    }
+
 		function setDocHeight() {
 			document.documentElement.style.setProperty(
 				"--vh",
 				`${window.innerHeight / 100}px`
 			);
-		}
-		addEventListener("resize", setDocHeight);
-		addEventListener("orientationchange", setDocHeight);
+      
+      addEventListener("resize", setDocHeight);
+      addEventListener("orientationchange", setDocHeight);
+    }
+    
 	</script>
 
 	<script src="helpers.js"></script>
 	<script src="block-logic.js"></script>
 	<script src="Matrix.js"></script>
 	<script src="Game.js"></script>
-	<script>
-		let game = new Game(11, 10);
-		let gameContainer = document.querySelector('#game-container');
-
-		function render() {
-			gameContainer.innerHTML = game.HTMLrendering(gameOverModal);
-		}
-
-		// TODO: Better modal handling for game over 
-		let gameOverModal = document.querySelector('#game-over-modal');
-
-		function play(input) {
-			game.update(input);
-			render();
-		}
-
-		// Movement input from buttons
-		for (btn of document.querySelectorAll('.inputButton')) {
-			btn.onclick = function () {
-				play(this.dataset.code) //HTML data-code attribute
-			};
-		}
-
-		// Movement input from arrow keys
-		const arrowKeys = ["ArrowLeft", "ArrowDown", "ArrowRight"];
-		document.addEventListener('keydown', function (event) {
-			if (arrowKeys.includes(event.code))
-				play(event.code);
-		});
-		
-		game.start();
-		render();
-	</script>
 	
 </body>
 </html>
