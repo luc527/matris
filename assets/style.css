@@ -167,7 +167,7 @@ body {
 @media (min-width: 1024px) {
 	html,
 	body {
-		font-size: 100%; /* 1rem = 16px */
+		font-size: 75%; /* 1rem = 16px */
 	}
 }
 
