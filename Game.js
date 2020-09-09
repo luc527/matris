@@ -1,7 +1,7 @@
 /* dependencies:
  * Matrix.js
  * helpers.js (in createNewPlayerBlock)
- * block-logic.js (in createNewPlayerBlock)
+ * block-logic.js (in createNewPlayerBlock and updateScore)
  */
 
 const directionToXOffset = {
@@ -15,6 +15,7 @@ class Game {
 		this.matrix = new Matrix(height, width);
 		this.playerBlock = { x: null, y: null };
 		/* playerBlock: points the block currently guided by the player in the matrix */
+		this.score = 0;
 	}
 
 	isPlayerBlockSettled() {
@@ -95,9 +96,54 @@ class Game {
 
 		this.updatePlayerBlock(input);
 		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
-			//calls some evaluation function, adds score etc.
+			this.updateScore();
 			this.createNewPlayerBlock();
 		}
+	}
+
+
+	updateScore() {
+		let left, center, right;
+		let leftOperand, operator, rightOperand;
+		let exprCounter = 0;
+
+		// Find and count true expressions in rows
+		for (let row = 0; row < this.matrix.height; row++) {
+			for (let col = 1; col < this.matrix.width-1; col++) {
+				left   = {y:row, x:col-1};
+				center = {y:row, x:col};
+				right  = {y:row, x:col+1};
+
+				leftOperand  = this.matrix.getBlock(left);
+				operator     = this.matrix.getBlock(center);
+				rightOperand = this.matrix.getBlock(right);
+
+				if (isTrueExpression(leftOperand, operator, rightOperand)) {
+					console.log(leftOperand+operator+rightOperand+' is true!');
+					exprCounter++;
+				}
+			}
+		}
+
+		// Find and count true expressions in cols
+		for (let col = 0; col < this.matrix.height; col++) {
+			for (let row = 1; row < this.matrix.width-1; row++) {
+				left   = {y:row+1, x:col};
+				center = {y:row,   x:col};
+				right  = {y:row-1, x:col};
+
+				leftOperand  = this.matrix.getBlock(left);
+				operator     = this.matrix.getBlock(center);
+				rightOperand = this.matrix.getBlock(right);
+
+				if (isTrueExpression(leftOperand, operator, rightOperand)) {
+					console.log(leftOperand+operator+rightOperand+' is true!');
+					exprCounter++;
+				}
+			}
+		}
+
+		this.score += exprCounter;
 	}
 
 	/* HTMLrendering: returns a rendering of the matrix as an HTML table.

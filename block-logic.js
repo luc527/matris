@@ -23,7 +23,22 @@ function getType(block) {
 
 function randomBlock() {
 	return randomElement(blocks);
-
 	/* //50/50 chance of comparision or number
 	return randomElement(Math.random() <= 0.5 ? comparisions : numbers); */
+}
+
+const operatorFunction = {
+	'>':  (l,r) => l >  r,
+	'<':  (l,r) => l <  r,
+	'>=': (l,r) => l >= r,
+	'<=': (l,r) => l <= r,
+	'=':  (l,r) => l == r,
+	'!=': (l,r) => l != r,
+};
+
+function isTrueExpression(leftOperand, operator, rightOperand) {
+	const valid = isNumber(leftOperand) && isComparision(operator) && isNumber(rightOperand);
+	if (!valid)
+		return false;
+	return operatorFunction[operator](Number(leftOperand), Number(rightOperand))
 }
