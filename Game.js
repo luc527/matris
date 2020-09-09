@@ -105,9 +105,11 @@ class Game {
 	updateScore() {
 		let left, center, right;
 		let leftOperand, operator, rightOperand;
-		let exprCounter = 0;
 
-		// Find and count true expressions in rows
+		let hExprCount = 0; //# of horizontal expressions found
+		let vExprCount = 0; //# of vertical expressions found
+
+		// Find and count true expressions in rows (horizontal)
 		for (let row = 0; row < this.matrix.height; row++) {
 			for (let col = 1; col < this.matrix.width-1; col++) {
 				left   = {y:row, x:col-1};
@@ -120,14 +122,14 @@ class Game {
 
 				if (isTrueExpression(leftOperand, operator, rightOperand)) {
 					console.log(leftOperand+operator+rightOperand+' is true!');
-					exprCounter++;
+					hExprCount++;
 				}
 			}
 		}
 
-		// Find and count true expressions in cols
-		for (let col = 0; col < this.matrix.height; col++) {
-			for (let row = 1; row < this.matrix.width-1; row++) {
+		// Find and count true expressions in cols (vertical)
+		for (let row = 1; row < this.matrix.height-1; row++) {
+			for (let col = 0; col < this.matrix.width; col++) {
 				left   = {y:row+1, x:col};
 				center = {y:row,   x:col};
 				right  = {y:row-1, x:col};
@@ -138,12 +140,15 @@ class Game {
 
 				if (isTrueExpression(leftOperand, operator, rightOperand)) {
 					console.log(leftOperand+operator+rightOperand+' is true!');
-					exprCounter++;
+					vExprCount++;
 				}
 			}
 		}
 
-		this.score += exprCounter;
+		// Calculates score
+		const hExprValue = 1;
+		const vExprValue = 2;
+		this.score += hExprValue*hExprCount + vExprValue*vExprCount;
 	}
 
 	/* HTMLrendering: returns a rendering of the matrix as an HTML table.
