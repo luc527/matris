@@ -40,5 +40,5 @@ function isTrueExpression(leftOperand, operator, rightOperand) {
 	const valid = isNumber(leftOperand) && isComparision(operator) && isNumber(rightOperand);
 	if (!valid)
 		return false;
-	return operatorFunction[operator](Number(leftOperand), Number(rightOperand))
+	return operatorFunction[operator](Number(leftOperand), Number(rightOperand));
 }

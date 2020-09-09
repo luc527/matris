@@ -144,6 +144,7 @@ class Game {
 				}
 			}
 		}
+		console.log('---');
 
 		// Calculates score
 		const hExprValue = 1;
