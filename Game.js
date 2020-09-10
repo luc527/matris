@@ -155,7 +155,6 @@ class Game {
 				rightOperand = oldMatrix.getBlock(right);
 
 				if (isTrueExpression(leftOperand, operator, rightOperand)) {
-					console.log(leftOperand+operator+rightOperand+' is true!');
 					this.matrix.setBlock(left, ' ');
 					this.matrix.setBlock(center, ' ');
 					this.matrix.setBlock(right, ' ');
@@ -176,7 +175,6 @@ class Game {
 				rightOperand = oldMatrix.getBlock(right);
 
 				if (isTrueExpression(leftOperand, operator, rightOperand)) {
-					console.log(leftOperand+operator+rightOperand+' is true!');
 					this.matrix.setBlock(left, ' ');
 					this.matrix.setBlock(center, ' ');
 					this.matrix.setBlock(right, ' ');
@@ -184,7 +182,6 @@ class Game {
 				}
 			}
 		}
-		console.log('---');
 
 		// Calculates score
 		const hExprValue = 1;
@@ -192,7 +189,6 @@ class Game {
 		this.score += hExprValue*hExprCount + vExprValue*vExprCount;
 
 		if (hExprCount > 0 || vExprCount > 0) {
-			console.log('makeBlocksFall');
 			this.makeBlocksFall();
 			/* makeBlocksFall because expressions may be formed below other blocks, and we don't want
 			 * the blocks to just float there after the expression is erased */

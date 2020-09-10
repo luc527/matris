@@ -67,19 +67,14 @@
 			<button type="button" title="Jogar novamente!" onClick="window.location.reload();">Jogar novamente!</button>
 		</div>
 	</div>
-
-	<script src="helpers.js"></script>
-	<script src="block-logic.js"></script>
-	<script src="Matrix.js"></script>
-	<script src="Game.js"></script>
 	
 	<script>
 
     window.onload = () => {
-      setDocHeight() /*,init()*/;
+      setDocHeight(), init();
     };
 
-    //function init() {
+    function init() {
       let game = new Game(11, 10);
       let gameContainer = document.querySelector('#game-container');
 
@@ -111,7 +106,7 @@
 
       game.start();
       render();
-    //}
+    }
 
 		function setDocHeight() {
 			document.documentElement.style.setProperty(
@@ -125,6 +120,10 @@
     
 	</script>
 
+	<script src="helpers.js"></script>
+	<script src="block-logic.js"></script>
+	<script src="Matrix.js"></script>
+	<script src="Game.js"></script>
 	
 </body>
 </html>
