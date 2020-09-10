@@ -12,6 +12,16 @@ class Matrix {
 	}
 
 
+	/* copy: returns a copy of this object */
+	copy() {
+		let copy = new Matrix(this.height, this.width);
+		let position = {y:null, x:null};
+		for (position.y = 0; position.y < copy.height; position.y++)
+			for (position.x = 0; position.x < copy.width; position.x++)
+				copy.setBlock(position, this.getBlock(position));
+		return copy;
+	}
+
 	/* initializeMatrix: sets matrix[i][j] = ' '
 	 * for i=0..height and j=0..width */
 	initializeMatrix() {
@@ -21,23 +31,6 @@ class Matrix {
 			for (let j = 0; j < this.width; j++)
 				this.matrix[i][j] = ' ';
 		}
-	}
-
-
-	getRow(rowNumber) {
-		if (rowNumber < 0 || rowNumber >= this.height)
-			return [];
-		return this.matrix[rowNumber];
-	}
-
-
-	getCol(colNumber) {
-		if (colNumber < 0 || colNumber >= this.width)
-			return [];
-		let col = [];
-		for (const row of this.matrix)
-			col.push(row[colNumber]);
-		return col;
 	}
 
 
