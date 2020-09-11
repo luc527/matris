@@ -192,8 +192,12 @@ class Game {
 			this.makeBlocksFall();
 			/* makeBlocksFall because expressions may be formed below other blocks, and we don't want
 			 * the blocks to just float there after the expression is erased */
+
+			/*
 			this.updateScore();
-			/* updateScore is called again because a falling block may form some new expression */
+			// updateScore is called again because a falling block may form some new expression
+			commented out because i'm not sure if this situation is even possible
+			*/
 		}
 	}
 
