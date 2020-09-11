@@ -74,10 +74,11 @@ class Game {
 			x: horizontal.x,
 		};
 
-		/* first tries to move horizontally and down.
-		 * if it can't, then tries to move just horizontally.
-		 * if it can't, then tries to move just down.
-		 * if it can't, then doesn't move at all */
+		/* first tries to move horizontally and down;
+		 * if it can't, then tries to move just horizontally;
+		 * if it can't, then tries to move just down.;
+		 * if it can't, then doesn't move at all;
+		 * in this strict order */
 		if (this.matrix.isAvailable(horizontalDown)) updated = horizontalDown;
 		else if (this.matrix.isAvailable(horizontal)) updated = horizontal;
 		else if (this.matrix.isAvailable(down)) updated = down;
@@ -124,6 +125,8 @@ class Game {
 	}
 
 
+	/* updateScore: called after the player settles a block on the matrix;
+	 * evaluates the matrix, updates the score, and erases formed expressions to free space */
 	updateScore() {
 		let left, center, right;
 		let leftOperand, operator, rightOperand;
@@ -135,7 +138,11 @@ class Game {
 		/* This procedure reads the expression from a copy (oldMatrix)
 		 * and modifies this.matrix accordingly (erasing true expressions to free space).
 		 * To understand why this is done, consider the following situation:
-		 * 7 > 3
+		 * 7 >
+		 * x x <
+		 * x x 9
+		 * ------
+		 * 7 > 3    <- player guides 3 there, forming two expressions
 		 * x x <
 		 * x x 9
 		 * Note that the 3 is part of two expression (7>3 and 3<9), and we want to consider both.
@@ -188,12 +195,33 @@ class Game {
 		const vExprValue = 2;
 		this.score += hExprValue*hExprCount + vExprValue*vExprCount;
 
-		if (hExprCount > 0 || vExprCount > 0) {
+		if (hExprCount > 0 || vExprCount > 0) { // there were formed expressions that got erased
 			this.makeBlocksFall();
 			/* makeBlocksFall because expressions may be formed below other blocks, and we don't want
-			 * the blocks to just float there after the expression is erased */
+			 * these blocks to just float there after the expression is erased */
 			this.updateScore();
-			/* updateScore is called again because a falling block may form some new expression */
+			/* updateScore is called again because a falling block (after .makeBlocksFall())
+			 * may form some new expression, requiring a second evaluation of the matrix,
+			 * as shown in the example:
+			 *     3
+			 *     >
+			 *   = 4
+			 * x x 2
+			 * ------
+			 *     3
+			 *     >
+			 * 4 = 4    <- player guided 4 to form 4=4
+			 * x x 2
+			 * ------
+			 *     3
+			 *     >
+			 * x x 2    <- 4=4 erased; new expression (3>2) formed from block falling
+			 * ------
+			 *     
+			 *     
+			 * x x      by calling updateScore again, this new expression is evaluated and erased
+			 * */
+
 		}
 	}
 
