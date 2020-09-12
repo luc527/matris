@@ -76,7 +76,7 @@ class Game {
 
 		/* first tries to move horizontally and down;
 		 * if it can't, then tries to move just horizontally;
-		 * if it can't, then tries to move just down.;
+		 * if it can't, then tries to move just down;
 		 * if it can't, then doesn't move at all;
 		 * in this strict order */
 		if (this.matrix.isAvailable(horizontalDown)) updated = horizontalDown;
@@ -232,6 +232,7 @@ class Game {
 		let block;
 		let danger; //to make the top row red, indicating game over
 		html += '<table id="game-table">';
+		html += `<caption id ="game-score">Score: ${this.score}</caption>`;
 		for (let y = this.matrix.height - 1; y >= 0; y--) {
 			danger = y == this.matrix.height - 1 ? "danger" : "";
 			html += '<tr class="game-row">';
