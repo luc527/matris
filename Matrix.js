@@ -22,8 +22,7 @@ class Matrix {
 		return copy;
 	}
 
-	/* initializeMatrix: sets matrix[i][j] = ' '
-	 * for i=0..height and j=0..width */
+	/* initializeMatrix: sets all positions in the matrix to ' ' */
 	initializeMatrix() {
 		this.matrix = new Array(this.height);
 		for (let i = 0; i < this.height; i++) {

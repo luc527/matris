@@ -14,7 +14,7 @@ class Game {
 	constructor(height, width) {
 		this.matrix = new Matrix(height, width);
 		this.playerBlock = { x: null, y: null };
-		/* playerBlock: points the block currently guided by the player in the matrix */
+		/* playerBlock: points to the block currently guided by the player in the matrix */
 		this.score = 0;
 	}
 
@@ -195,12 +195,12 @@ class Game {
 		const vExprValue = 2;
 		this.score += hExprValue*hExprCount + vExprValue*vExprCount;
 
-		if (hExprCount > 0 || vExprCount > 0) { // there were formed expressions that got erased
+		if (hExprCount > 0 || vExprCount > 0) { // expressions got erased
 			this.makeBlocksFall();
 			/* makeBlocksFall because expressions may be formed below other blocks, and we don't want
-			 * these blocks to just float there after the expression is erased */
+			 * those blocks to just float after the expression is erased */
 			this.updateScore();
-			/* updateScore is called again because a falling block (after .makeBlocksFall())
+			/* updateScore is called again because a falling block (after makeBlocksFall())
 			 * may form some new expression, requiring a second evaluation of the matrix,
 			 * as shown in the example:
 			 *     3
@@ -215,7 +215,7 @@ class Game {
 			 * ------
 			 *     3
 			 *     >
-			 * x x 2    <- 4=4 erased; new expression (3>2) formed from block falling
+			 * x x 2    <- 4=4 erased; new expression (3>2) formed from falling blocks
 			 * ------
 			 *     
 			 *     
@@ -226,13 +226,13 @@ class Game {
 	}
 
 	/* HTMLrendering: returns a rendering of the matrix as an HTML table.
-	 * styling is defered, as only the css classes are provided */
+	 * styling is defered -- only the css classes are provided */
 	HTMLrendering(gameOverModal) {
 		let html = "";
 		let block;
 		let danger; //to make the top row red, indicating game over
 		html += '<table id="game-table">';
-		html += `<caption id ="game-score">Score: ${this.score}</caption>`;
+		html += `<caption id ="game-score">Pontuação: ${this.score}</caption>`;
 		for (let y = this.matrix.height - 1; y >= 0; y--) {
 			danger = y == this.matrix.height - 1 ? "danger" : "";
 			html += '<tr class="game-row">';
