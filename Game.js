@@ -16,6 +16,7 @@ class Game {
 		this.playerBlock = { x: null, y: null };
 		/* playerBlock: points to the block currently guided by the player in the matrix */
 		this.score = 0;
+		this.gameOverModalShown = false;
 	}
 
 	isPlayerBlockSettled() {
@@ -88,11 +89,9 @@ class Game {
 		this.playerBlock = this.matrix.moveBlock(this.playerBlock, updated);
 	}
 
-
 	start() {
 		this.createNewPlayerBlock();
 	}
-
 
 	update(input) {
 		if (this.isGameOver()) return;
@@ -104,15 +103,14 @@ class Game {
 		}
 	}
 
-
 	/* makeBlocksFall: applies gravity to the matrix,
 	 * blocks with empty spaces below will go down until reaching ground */
 	makeBlocksFall() {
-		let current = {y:null, x:null};
+		let current = { y: null, x: null };
 
-		for (current.y = 0; current.y < this.matrix.height-1; current.y++) {
+		for (current.y = 0; current.y < this.matrix.height - 1; current.y++) {
 			for (current.x = 0; current.x < this.matrix.width; current.x++) {
-				if (this.matrix.getBlock(current) == ' ') {
+				if (this.matrix.getBlock(current) == " ") {
 					const above = {
 						y: current.y + 1,
 						x: current.x,
@@ -123,7 +121,6 @@ class Game {
 			}
 		}
 	}
-
 
 	/* updateScore: called after the player settles a block on the matrix;
 	 * evaluates the matrix, updates the score, and erases formed expressions to free space */
@@ -152,39 +149,39 @@ class Game {
 
 		// Find and count true expressions in rows (horizontal)
 		for (let row = 0; row < oldMatrix.height; row++) {
-			for (let col = 1; col < oldMatrix.width-1; col++) {
-				left   = {y:row, x:col-1};
-				center = {y:row, x:col};
-				right  = {y:row, x:col+1};
+			for (let col = 1; col < oldMatrix.width - 1; col++) {
+				left = { y: row, x: col - 1 };
+				center = { y: row, x: col };
+				right = { y: row, x: col + 1 };
 
-				leftOperand  = oldMatrix.getBlock(left);
-				operator     = oldMatrix.getBlock(center);
+				leftOperand = oldMatrix.getBlock(left);
+				operator = oldMatrix.getBlock(center);
 				rightOperand = oldMatrix.getBlock(right);
 
 				if (isTrueExpression(leftOperand, operator, rightOperand)) {
-					this.matrix.setBlock(left, ' ');
-					this.matrix.setBlock(center, ' ');
-					this.matrix.setBlock(right, ' ');
+					this.matrix.setBlock(left, " ");
+					this.matrix.setBlock(center, " ");
+					this.matrix.setBlock(right, " ");
 					hExprCount++;
 				}
 			}
 		}
 
 		// Find and count true expressions in cols (vertical)
-		for (let row = 1; row < oldMatrix.height-1; row++) {
+		for (let row = 1; row < oldMatrix.height - 1; row++) {
 			for (let col = 0; col < oldMatrix.width; col++) {
-				left   = {y:row+1, x:col};
-				center = {y:row,   x:col};
-				right  = {y:row-1, x:col};
+				left = { y: row + 1, x: col };
+				center = { y: row, x: col };
+				right = { y: row - 1, x: col };
 
-				leftOperand  = oldMatrix.getBlock(left);
-				operator     = oldMatrix.getBlock(center);
+				leftOperand = oldMatrix.getBlock(left);
+				operator = oldMatrix.getBlock(center);
 				rightOperand = oldMatrix.getBlock(right);
 
 				if (isTrueExpression(leftOperand, operator, rightOperand)) {
-					this.matrix.setBlock(left, ' ');
-					this.matrix.setBlock(center, ' ');
-					this.matrix.setBlock(right, ' ');
+					this.matrix.setBlock(left, " ");
+					this.matrix.setBlock(center, " ");
+					this.matrix.setBlock(right, " ");
 					vExprCount++;
 				}
 			}
@@ -193,9 +190,10 @@ class Game {
 		// Calculates score
 		const hExprValue = 1;
 		const vExprValue = 2;
-		this.score += hExprValue*hExprCount + vExprValue*vExprCount;
+		this.score += hExprValue * hExprCount + vExprValue * vExprCount;
 
-		if (hExprCount > 0 || vExprCount > 0) { // expressions got erased
+		if (hExprCount > 0 || vExprCount > 0) {
+			// expressions got erased
 			this.makeBlocksFall();
 			/* makeBlocksFall because expressions may be formed below other blocks, and we don't want
 			 * those blocks to just float after the expression is erased */
@@ -217,17 +215,33 @@ class Game {
 			 *     >
 			 * x x 2    <- 4=4 erased; new expression (3>2) formed from falling blocks
 			 * ------
-			 *     
-			 *     
+			 *
+			 *
 			 * x x      by calling updateScore again, this new expression is evaluated and erased
 			 * */
-
 		}
+	}
+
+	showGameOverModal() {
+		const html = `<div id="game-over-modal" class="modal">
+                      <div class="modal__container">
+                        <h2>Game over!</h2>
+                        <p>${
+													this.score > 0
+														? `Você fez ${this.score} pontos`
+														: "Você não pontuou"
+												}</p>
+                        <button type="button" title="Jogar novamente!" onclick="window.location.reload();">Jogar novamente!</button>
+                      </div>
+                    </div>`;
+
+		document.body.insertAdjacentHTML("beforeend", html);
+		this.gameOverModalShown = true;
 	}
 
 	/* HTMLrendering: returns a rendering of the matrix as an HTML table.
 	 * styling is defered -- only the css classes are provided */
-	HTMLrendering(gameOverModal) {
+	HTMLrendering() {
 		let html = "";
 		let block;
 		let danger; //to make the top row red, indicating game over
@@ -245,9 +259,11 @@ class Game {
 			html += "</tr>";
 		}
 		html += "</table>";
-		if (this.isGameOver()) {
-			gameOverModal.style = "display: flex;";
+		if (this.isGameOver() && this.gameOverModalShown === false) {
+			this.showGameOverModal();
+			addScore(this.score);
 		}
+
 		return html;
 	}
 }
