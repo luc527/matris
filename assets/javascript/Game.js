@@ -39,6 +39,24 @@ class Game {
 		return false;
 	}
 
+
+	/* blockTypeCount: returns a {numbers, comparisons} object with the
+	 * number of number blocks and comparison blocks on the board */
+	blockTypeCount() {
+		let c = {
+			numbers: 0,
+			comparisons: 0,
+		};
+		let i = { y:null, x:null };
+		for (i.y = 0; i.y < this.matrix.height; i.y++)
+			for (i.x = 0; i.x < this.matrix.width; i.x++) {
+				const type = getType(this.matrix.getBlock(i));
+				if (type == 'number') c.numbers++;
+				else if (type == 'comparison') c.comparisons++;
+			}
+		return c;
+	}
+
 	/* createNewPlayerBlock: instantiates a new block on the top
 	 * of the matrix, which this.playerBlock will point to */
 	createNewPlayerBlock() {
