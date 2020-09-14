@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /* 
   CSS Reset
   http://meyerweb.com/eric/tools/css/reset/ 
@@ -157,9 +164,20 @@ body {
 	height: calc(var(--vh, 1vh) * 100);
 	width: 100vw;
 
+	display: -webkit-box;
+
+	display: -ms-flexbox;
+
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: space-evenly;
+	-ms-flex-pack: space-evenly;
 	justify-content: space-evenly;
 
 	font-family: var(--font-default);
@@ -168,9 +186,18 @@ body {
 
 header {
 	width: var(--width-default);
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
 	flex-direction: row;
 }
 
@@ -183,8 +210,14 @@ header svg {
 header nav {
 	/* width: var(--width-default); */
 	/* margin-top: 2.4rem; */
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
 
@@ -206,7 +239,11 @@ header nav a svg {
 
 footer {
 	width: var(--width-default);
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
 
@@ -221,6 +258,8 @@ a {
 	border: none;
 	padding: 0;
 	margin: 0;
+	-webkit-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 	font-family: var(--font-default);
 }
@@ -233,17 +272,27 @@ a:hover {
 
 button:active,
 a:active {
+	-webkit-transform: scale(0.95);
+	-ms-transform: scale(0.95);
 	transform: scale(0.95);
 }
 
 main {
+	width: -webkit-min-content;
+	width: -moz-min-content;
 	width: min-content;
+	-ms-grid-column-align: center;
 	justify-self: center;
 	min-height: 30rem;
 }
 
 table {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 }
 
@@ -259,12 +308,20 @@ table#game-table * {
 }
 
 tr {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 }
 
 tr td {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 	border: 0.1rem solid var(--color-light-grey);
 	width: 4rem;
@@ -304,8 +361,14 @@ p#game-over {
 	width: 100vw;
 
 	z-index: 100;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
 	background-color: rgba(1, 1, 1, 0.5);
 }
