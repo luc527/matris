@@ -24,7 +24,7 @@
 
   <!-- OG Meta Tags -->
   <meta property="og:site_name" content="Matris" />
-  <meta property="og:site" content="matris-game.vercel.app" />
+  <meta property="og:site" content="Matris" />
   <meta property="og:title" content="Matris" />
   <meta property="og:description" content="Aprenda expressões matemáticas se divertindo." />
   <meta property="og:image" content="assets/icons/logo.jpg" />
@@ -52,7 +52,7 @@
     }
   </style>
 
-  <link rel="stylesheet" href="./assets/style/style.min.css">
+  <link rel="stylesheet" href="./assets/style/style.css">
 </head>
 <body>
 
@@ -125,19 +125,19 @@
 	
 	<script>
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(reg => console.log('Service worker successfully installed 😍'))
-        .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
-    }
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.register('./service-worker.js')
+    //     .then(reg => console.log('Service worker successfully installed 😍'))
+    //     .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
+    // }
 
     window.onload = () => {
       setDocHeight(), init();
     };
 
     function init() {
-      let game = new Game(8, 8);
-      let gameContainer = document.querySelector('#game-container');
+      const game = new Game(10, 8);
+      const gameContainer = document.querySelector('#game-container');
 
       function render() {
         gameContainer.innerHTML = game.HTMLrendering();

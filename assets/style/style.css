@@ -144,7 +144,7 @@ table {
 	/* Fonts */
 	--font-default: "IBM Plex Mono", monospace;
 
-	--width-default: 26rem;
+	--width-default: 32rem;
 }
 
 html,
@@ -245,7 +245,7 @@ table caption {
 }
 
 table#game-table * {
-	font-size: 1.6rem;
+	font-size: 2.4rem;
 	letter-spacing: 0;
 	font-weight: bold;
 }
@@ -259,8 +259,8 @@ tr td {
 	align-items: center;
 	justify-content: center;
 	border: 0.1rem solid var(--color-light-grey);
-	width: 3rem;
-	height: 3rem;
+	width: 4rem;
+	height: 4rem;
 	text-align: center;
 	border-collapse: collapse;
 	color: var(--color-white);
@@ -275,7 +275,7 @@ tr td.game-cell.empty {
 tr td.game-cell.number {
 	background-color: var(--color-primary);
 }
-tr td.game-cell.comparision {
+tr td.game-cell.comparison {
 	background-color: var(--color-green);
 }
 
@@ -329,10 +329,6 @@ p#game-over {
 	font-size: 1.8rem;
 }
 
-.modal--ranking {
-	align-items: center;
-}
-
 .modal--ranking ol {
 	list-style: inside;
 	list-style-type: decimal;
@@ -352,24 +348,16 @@ p#game-over {
 	}
 }
 
-@media (min-width: 768px) {
-	.modal {
-		align-items: center;
-	}
-
-	.modal__container button {
-		font-size: 2.4rem;
-	}
-
-	.modal__container p {
-		margin: 1.6rem 0;
-		font-size: 1.8rem;
+@media (min-width: 2560px) {
+	html,
+	body {
+		font-size: 100%;
 	}
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 3840px) {
 	html,
 	body {
-		font-size: 85%;
+		font-size: 162.5%;
 	}
 }
