@@ -41,7 +41,7 @@ class Game {
 
 
 	/* blockTypeCount: returns a {numbers, comparisons} object with the
-	 * number of number blocks and comparison blocks on the board */
+	 * number of number blocks and comparison blocks on the matrix */
 	blockTypeCount() {
 		let c = {
 			numbers: 0,
@@ -64,7 +64,7 @@ class Game {
 			y: this.matrix.height - 1,
 			x: randomIntBetween(0, this.matrix.width),
 		};
-		this.matrix.setBlock(this.playerBlock, randomBlock());
+		this.matrix.setBlock(this.playerBlock, randomBalancedBlock(this.blockTypeCount()));
 	}
 
 	/* updatePlayerBlock: moves the playerBlock according

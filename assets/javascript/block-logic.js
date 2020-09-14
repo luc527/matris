@@ -21,10 +21,25 @@ function getType(block) {
 	return "invalid";
 }
 
-function randomBlock() {
+/* function randomBlock() {
 	return randomElement(blocks);
-	/* //50/50 chance of comparison or number
-	return randomElement(Math.random() <= 0.5 ? comparisons : numbers); */
+} */
+
+/* randomBalancedBlock: given the amount of numbers and comparisons at the game,
+ * if the amount is balanced, just return a random block
+ * otherwise, return a block to balance it (too many numbers -> returns comparison, and vice-versa) */
+function randomBalancedBlock(typeCount) {
+	const threshold = 5;
+
+	if (typeCount.comparisons == 0) typeCount.comparisons = 1; //preventing division by zero
+	if (typeCount.numbers == 0) typeCount.numbers = 1; //preventing ratio=0, which is < 1/threshold
+
+	const ratio = typeCount.numbers / typeCount.comparisons;
+	if (ratio > threshold) //too many numbers -- more than <threshold> numbers to 1 comparisons
+		return randomElement(comparisons);
+	if (ratio < 1/threshold) // too many comparisons -- more than <threshold> comparisons to 1 number
+		return randomElement(numbers);
+	return randomElement(blocks);
 }
 
 const operatorFunction = {
