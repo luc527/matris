@@ -78,7 +78,7 @@
     </svg>
 
     <nav style="justify-content: center;">
-      <button type="button" style="align-self: center" title="Ranking pessoal" onclick="renderRanking()">
+      <button type="button" style="align-self: center; margin-right: 0;" title="Ranking pessoal" onclick="renderRanking()">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="48" height="48" fill="#2CB67D" />
           <path d="M12 24H18V36H12V24Z" fill="#EFF0F3" />
@@ -124,11 +124,11 @@
 
   <script>
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(reg => console.log('Service worker successfully installed 😍'))
-        .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
-    }
+    // if ('serviceWorker' in navigator) {
+    //   navigator.serviceWorker.register('./service-worker.js')
+    //     .then(reg => console.log('Service worker successfully installed 😍'))
+    //     .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
+    // }
 
     window.onload = () => {
       setDocHeight(), init();
