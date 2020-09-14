@@ -4,19 +4,17 @@ if (rankingScores.length > 10) {
 	rankingScores.splice(-1, 1);
 }
 
-// ADD SCORE
+// STORE SCORE
 
-function addScore(score) {
+function storeScore(score) {
 	if (score > 0) {
 		rankingScores.push(score);
 
-		rankingScores.sort();
+		rankingScores.sort((a,b) => b - a); //Sort numerically, in descending order 
 
 		saveToStorage();
 	}
 }
-
-// STORE SCORES
 
 function saveToStorage() {
 	localStorage.setItem("ranking_scores", JSON.stringify(rankingScores));

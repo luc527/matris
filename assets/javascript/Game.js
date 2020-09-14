@@ -115,7 +115,9 @@ class Game {
 		if (this.isGameOver()) return;
 
 		this.updatePlayerBlock(input);
-		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
+		if (this.isGameOver()) {
+			storeScore(this.score);
+		} else if (this.isPlayerBlockSettled()) {
 			this.updateScore();
 			this.createNewPlayerBlock();
 		}
@@ -124,17 +126,16 @@ class Game {
 	/* makeBlocksFall: applies gravity to the matrix,
 	 * blocks with empty spaces below will go down until reaching ground */
 	makeBlocksFall() {
-		let current = { y: null, x: null };
-
-		for (current.y = 0; current.y < this.matrix.height - 1; current.y++) {
-			for (current.x = 0; current.x < this.matrix.width; current.x++) {
-				if (this.matrix.getBlock(current) == " ") {
-					const above = {
-						y: current.y + 1,
-						x: current.x,
-					};
-					this.matrix.moveBlock(above, current);
-					// move from above to the current position (below)
+		let i = { y: null, x: null };
+		for (i.y = 1; i.y < this.matrix.height; i.y++) {
+			for (i.x = 0; i.x < this.matrix.width; i.x++) {
+				const below = { y:i.y-1, x:i.x };
+				if (!this.matrix.isAvailable(i) && this.matrix.isAvailable(below)) { //block at i is floating
+					let ground = { y:i.y-1, x:i.x };
+					while (this.matrix.isAvailable(ground))
+						ground.y--;
+					ground.y++; //move block ABOVE ground, not IN the ground
+					this.matrix.moveBlock(i, ground);
 				}
 			}
 		}
@@ -279,7 +280,6 @@ class Game {
 		html += "</table>";
 		if (this.isGameOver() && this.gameOverModalShown === false) {
 			this.showGameOverModal();
-			addScore(this.score);
 		}
 
 		return html;
