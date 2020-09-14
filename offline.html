@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
   <title>Matris</title>
@@ -38,8 +39,8 @@
   <link rel="apple-touch-icon" sizes="192x192" href="./assets/icons/icon-192x192.png">
 
   <!-- Favicon -->
-	<link rel="shortcut icon" href="./assets/icons/favicon.png" />
-	<link rel="apple-touch-icon" href="./assets/icons/favicon.png" />
+  <link rel="shortcut icon" href="./assets/icons/favicon.png" />
+  <link rel="apple-touch-icon" href="./assets/icons/favicon.png" />
 
   <style>
     @font-face {
@@ -54,9 +55,10 @@
 
   <link rel="stylesheet" href="./assets/style/style.min.css">
 </head>
+
 <body>
 
-	<header>
+  <header>
     <svg viewBox="0 0 352 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Matris Logo">
       <path
         d="M154.775 47.645l-1.366-4.53h-15.226l-3.348 14.318h-12.117L137.704 0h7.813v12.489H156.095l11.435 35.156h-12.755zm-8.621-35.156h-.637l-5.421 21h11.479l-5.421-21z"
@@ -75,8 +77,8 @@
       <path d="M44.372 0v13.061h13.06v8.707h-13.06V34.83h-8.708V21.77h-13.06V13.06h13.06V0h8.708z" fill="#7F5AF0" />
     </svg>
 
-    <nav>
-      <button type="button" title="Ranking pessoal" onclick="renderRanking()">
+    <nav style="justify-content: center;">
+      <button type="button" style="align-self: center" title="Ranking pessoal" onclick="renderRanking()">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="48" height="48" fill="#2CB67D" />
           <path d="M12 24H18V36H12V24Z" fill="#EFF0F3" />
@@ -84,46 +86,43 @@
           <path d="M30 12H36V36H30V12Z" fill="#EFF0F3" />
         </svg>
       </button>
-      <a href="ajuda/" title="Ajuda?">
+      <!-- <a href="ajuda/" title="Ajuda?">
         <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="48" height="48" fill="#7F5AF0" />
           <path
             d="M20.8864 27.856V22.7701C22.5485 22.7036 23.867 22.4155 24.8421 21.9058C25.8172 21.3961 26.3047 20.5097 26.3047 19.2465V18.7812C26.3047 17.8504 26.0277 17.1856 25.4737 16.7867C24.9418 16.3878 24.277 16.1884 23.4792 16.1884C22.5706 16.1884 21.8283 16.4543 21.2521 16.9862C20.6759 17.4958 20.277 18.1717 20.0554 19.0139L16 17.3186C16.1994 16.6537 16.4875 16.0111 16.8643 15.3906C17.2632 14.7479 17.7729 14.1828 18.3934 13.6953C19.0139 13.1856 19.7562 12.7756 20.6205 12.4654C21.4848 12.1551 22.4931 12 23.6454 12C24.8199 12 25.8837 12.1662 26.8366 12.4986C27.8116 12.831 28.6427 13.2964 29.3296 13.8947C30.0166 14.4931 30.5485 15.2133 30.9252 16.0554C31.3019 16.8975 31.4903 17.8172 31.4903 18.8144C31.4903 19.7452 31.3241 20.5983 30.9917 21.374C30.6814 22.1274 30.2493 22.7922 29.6953 23.3684C29.1634 23.9224 28.5319 24.3767 27.8006 24.7313C27.0914 25.0859 26.3379 25.3296 25.5402 25.4626V27.856H20.8864ZM23.2798 36C22.1053 36 21.2632 35.7452 20.7535 35.2355C20.2659 34.7258 20.0222 34.1163 20.0222 33.4072V32.3435C20.0222 31.6343 20.2659 31.036 20.7535 30.5485C21.2632 30.0388 22.1053 29.7839 23.2798 29.7839C24.4543 29.7839 25.2964 30.0388 25.8061 30.5485C26.3158 31.0582 26.5706 31.6565 26.5706 32.3435V33.4072C26.5706 34.1163 26.3158 34.7258 25.8061 35.2355C25.3186 35.7452 24.4765 36 23.2798 36Z"
             fill="#EFF0F3" />
         </svg>
-      </a>
+      </a> -->
     </nav>
 
-	</header>
+  </header>
 
-	<main 
-		style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
-		unselectable="on"
-		onselectstart="return false;" 
-		onmousedown="return false;"
-	>
-		<div id="game-container"></div>
-	</main>
+  <main
+    style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;"
+    unselectable="on" onselectstart="return false;" onmousedown="return false;">
+    <div id="game-container"></div>
+  </main>
 
-	<footer>
-		<button type="button" title="Mover para esquerda" class="inputButton" data-code="ArrowLeft">
-			<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M3.81596e-07 32L64 7.63192e-07L64 64L3.81596e-07 32Z" fill="#7F5AF0" />
-			</svg>
-		</button>
-		<button type="button" title="Mover para baixo" class="inputButton" data-code="ArrowDown">
-			<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M32 64L-5.59506e-06 9.40975e-06L64 3.8147e-06L32 64Z" fill="#7F5AF0" />
-			</svg>
-		</button>
-		<button type="button" title="Mover para a direita" class="inputButton" data-code="ArrowRight">
-			<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M64 32L1.01717e-06 64L3.8147e-06 -2.79753e-06L64 32Z" fill="#7F5AF0" />
-			</svg>
-		</button>
-	</footer>
-	
-	<script>
+  <footer>
+    <button type="button" title="Mover para esquerda" class="inputButton" data-code="ArrowLeft">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.81596e-07 32L64 7.63192e-07L64 64L3.81596e-07 32Z" fill="#7F5AF0" />
+      </svg>
+    </button>
+    <button type="button" title="Mover para baixo" class="inputButton" data-code="ArrowDown">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 64L-5.59506e-06 9.40975e-06L64 3.8147e-06L32 64Z" fill="#7F5AF0" />
+      </svg>
+    </button>
+    <button type="button" title="Mover para a direita" class="inputButton" data-code="ArrowRight">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M64 32L1.01717e-06 64L3.8147e-06 -2.79753e-06L64 32Z" fill="#7F5AF0" />
+      </svg>
+    </button>
+  </footer>
+
+  <script>
 
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./service-worker.js')
@@ -166,12 +165,12 @@
       render();
     }
 
-		function setDocHeight() {
-			document.documentElement.style.setProperty(
-				"--vh",
-				`${window.innerHeight / 100}px`
-			);
-      
+    function setDocHeight() {
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight / 100}px`
+      );
+
       addEventListener("resize", setDocHeight);
       addEventListener("orientationchange", setDocHeight);
     }
@@ -181,9 +180,10 @@
       modalContainer.remove();
     }
 
-	</script>
+  </script>
 
   <script src="assets/javascript/main.min.js" async></script>
-	
+
 </body>
+
 </html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <title>Matris - Ajuda</title>
+
+  <meta name="author" content="Lucas M. Schwambach, Mateus L. C. Brandt">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
+  <meta name="theme-color" content="#eff0f3" />
+
+  <!-- SEO Tags -->
+  <meta name="description" content="Aprenda a jogar o Matris." />
+  <meta name="language" content="pt-BR" />
+  <meta name="keywords" content="Jogo, Matemática, Engenharia de Software" />
+  <meta name="robot" content="Index, Follow">
+  <meta name="rating" content="general">
+  <meta name="distribution" content="global">
+
+  <!-- Manifest -->
+  <link rel="manifest" href="../manifest.json">
+
+  <!-- OG Meta Tags -->
+  <meta property="og:site_name" content="Matris" />
+  <meta property="og:site" content="matris-game.vercel.app" />
+  <meta property="og:title" content="Matris" />
+  <meta property="og:description" content="Aprenda a jogar o Matris. " />
+  <meta property="og:image" content="assets/icons/logo.jpg" />
+  <meta property="og:url" content="matris-game.vercel.app" />
+  <meta property="og:type" content="game" />
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white">
+  <meta name="apple-mobile-web-app-title" content="Matris">
+  <link rel="apple-touch-icon" sizes="192x192" href="../assets/icons/icon-192x192.png">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../assets/icons/favicon.png" />
+  <link rel="apple-touch-icon" href="../assets/icons/favicon.png" />
+
+  <link rel="stylesheet" href="../assets/style/style.min.css">
+  
+  <style>
+    :root {
+      --width-default: 34rem;
+    }
+
+    @font-face {
+      font-family: "IBM Plex Mono";
+      src: url("../assets/fonts/ibm-plex-monobold.woff2") format("woff2"),
+        url("../assets/fonts/ibm-plex-monobold.woff") format("woff"),
+        url("../assets/fonts/ibm-plex-monobold.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    header {
+      margin: 3.2rem 0;
+    }
+
+    main {
+      width: var(--width-default);
+      font-size: 1.6rem;
+      line-height: 1.25;
+    }
+
+    h2 {
+      font-size: 3.6rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .red-text {
+      color: var(--color-red);
+    }
+    
+    .green-text {
+      color: var(--color-green);
+    }
+    
+    .purple-text {
+      color: var(--color-primary);
+    }
+
+    .comparison {
+      display: flex;
+      align-items: center;
+    }
+
+    .comparison svg {
+      height: 3.2rem;
+    }
+
+    section {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 3.2rem;
+    }
+
+    section p {
+      margin-bottom: 1.6rem;
+    }
+
+    section a {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      text-align: center;
+      font-size: 2.4rem;
+      padding: 0.8rem 0;
+      text-decoration: none;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <a href="../">
+      <svg viewBox="0 0 352 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Matris Logo">
+        <path
+          d="M154.775 47.645l-1.366-4.53h-15.226l-3.348 14.318h-12.117L137.704 0h7.813v12.489H156.095l11.435 35.156h-12.755zm-8.621-35.156h-.637l-5.421 21h11.479l-5.421-21z"
+          fill="#2CB67D" />
+        <path
+          d="M194.174 10.739l.08 46.694h-11.958l-.08-46.694h-10.981V0h38.962v10.739h-16.023zM229.936 57.433h-11.798V35.876h11.798v-9.228h-11.798V0h21.523c2.711 0 5.129.424 7.255 1.273 2.125.795 3.906 2.916 5.341 4.454 1.488 1.538 2.604 3.394 3.348 5.569.744 2.174 1.116 4.613 1.116 7.318 0 3.924-.851 7.292-2.551 10.102-1.701 2.811-4.119 4.667-7.254 5.569l5.819 13.364h-13.074l-4.225-11.773h-5.5v21.557zm6.855-30.785c2.817 0 4.757-.53 5.82-1.59 1.116-1.061 1.674-2.811 1.674-5.25V17.42c0-2.44-.285-3.623-1.285-4.623s-1-2.5-13.064-2.218v16.068h6.855zM330.716 57.433c-4.677 0-8.743-.77-12.197-2.307a25.17 25.17 0 01-.641-.296l6.528-8.402c-.235-.092.235.102 0 0 2.214.867 4.45 1.3 6.708 1.3 2.87 0 5.049-.636 6.537-1.91 1.488-1.272 2.232-3.101 2.232-5.488 0-1.962-.585-3.447-1.754-4.454-.884-.799-2.269-1.414-4.155-1.846l-11.797-2.38c-2.785-1.004-4.934-2.46-6.448-4.365-2.232-2.864-3.348-6.338-3.348-10.421 0-5.356 1.753-9.493 5.261-12.41C321.15 1.485 326.065 0 332.39 0c4.304 0 8.051.663 11.24 1.989.369.153.729.313 1.082.479l-6.369 8.25c-1.77-.675-3.728-1.013-5.874-1.013-5.367 0-8.051 2.2-8.051 6.602 0 1.91.585 3.341 1.754 4.296.795.621 1.906 1.141 3.333 1.56l-7.328 9.487 11.797 2.38 7.276-9.427c2.922.935 5.284 2.36 7.083 4.272 2.445 2.599 3.667 6.1 3.667 10.5 0 2.6-.452 5.012-1.355 7.24-.904 2.174-2.259 4.083-4.066 5.727-1.807 1.59-4.039 2.837-6.696 3.739-2.604.901-5.66 1.352-9.167 1.352z"
+          fill="#7F5AF0" />
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M103.127 31.843l.072-16.045h-.112l-10.432 29.54-10.432-29.521H71.791V0h14.15l6.874 19.336h.64L100.328 0h13.19v46.664h-10.392v-14.82zm-31.336 25.59v-30.96h10.368l.024 5.37v25.59H71.791z"
+          fill="#7F5AF0" />
+        <path d="M265.857 57.433v-9.785h11.958V9.785h-9.361V0h33.276v9.784h-11.958v37.864h8.299v9.785h-32.214z"
+          fill="#D9376E" />
+        <path
+          d="M6.157 26.648l9.236 9.235 9.235-9.235 6.157 6.157-9.235 9.235 9.235 9.236-6.157 6.157-9.235-9.236-9.236 9.236L0 51.276l9.236-9.236L0 32.805l6.157-6.157z"
+          fill="#2CB67D" />
+        <path d="M44.372 0v13.061h13.06v8.707h-13.06V34.83h-8.708V21.77h-13.06V13.06h13.06V0h8.708z" fill="#7F5AF0" />
+      </svg>
+    </a>
+
+  </header>
+
+  <main class="main__help">
+    
+    <section>
+      <h2>Como funciona?</h2>
+      <p>
+        Matris (MAThematical tetrIS) É um jogo semelhante a Tetris com tema matemático. As peças são todas compostas por um
+        bloco contendo um <span class="purple-text">número</span> de 0 a 9 ou uma <span class="green-text">comparação</span> >, <,>=, <=, !=,=. O jogador deve posicionar os blocos para formar
+        expressões matemáticas verdadeiras, o que aumenta sua pontuação. Ele deve, no entanto, tomar cuidado para não
+        preencher a tela, pois o jogo termina se uma peça é posta na <span class="red-text">linha vermelha</span>.
+      </p>
+      <div class="comparison">
+        <svg viewBox="0 0 96 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: auto;">
+          <rect width="32" height="32" fill="#7F5AF0" />
+          <path
+            d="M16.102 23V20.588H10.45V18.284L15.454 10.436H18.694V18.5H20.314V20.588H18.694V23H16.102ZM12.628 18.5H16.102V13.226H15.94L12.628 18.5Z"
+            fill="#EFF0F3" />
+          <rect x="32" width="32" height="32" fill="#2CB67D" />
+          <path
+            d="M38.5303 20.4081L43.8763 17.5821V17.4381L38.5303 14.6121V12.1281L46.2703 16.2681V18.7521L38.5303 22.8921V20.4081Z"
+            fill="#EFF0F3" />
+          <path d="M48.5492 16.5021V14.3781H57.1172V16.5021H48.5492ZM48.5492 20.6421V18.5181H57.1172V20.6421H48.5492Z"
+            fill="#EFF0F3" />
+          <rect x="64" width="32" height="32" fill="#7F5AF0" />
+          <path
+            d="M79.4002 23.216C78.6442 23.216 77.9722 23.126 77.3842 22.946C76.7962 22.754 76.2982 22.496 75.8902 22.172C75.4822 21.848 75.1702 21.464 74.9542 21.02C74.7502 20.564 74.6482 20.072 74.6482 19.544C74.6482 18.728 74.8822 18.074 75.3502 17.582C75.8182 17.078 76.4182 16.724 77.1502 16.52V16.376C76.5262 16.148 76.0162 15.8 75.6202 15.332C75.2242 14.864 75.0262 14.264 75.0262 13.532C75.0262 13.052 75.1222 12.608 75.3142 12.2C75.5062 11.792 75.7882 11.444 76.1602 11.156C76.5322 10.856 76.9882 10.628 77.5282 10.472C78.0682 10.304 78.6922 10.22 79.4002 10.22C80.0962 10.22 80.7142 10.304 81.2542 10.472C81.8062 10.628 82.2682 10.856 82.6402 11.156C83.0122 11.444 83.2942 11.792 83.4862 12.2C83.6782 12.608 83.7742 13.052 83.7742 13.532C83.7742 14.264 83.5762 14.864 83.1802 15.332C82.7842 15.8 82.2742 16.148 81.6502 16.376V16.52C82.3822 16.724 82.9822 17.078 83.4502 17.582C83.9182 18.074 84.1522 18.728 84.1522 19.544C84.1522 20.072 84.0442 20.564 83.8282 21.02C83.6242 21.464 83.3182 21.848 82.9102 22.172C82.5022 22.496 82.0042 22.754 81.4162 22.946C80.8282 23.126 80.1562 23.216 79.4002 23.216ZM79.4002 21.146C80.0242 21.146 80.4982 21.002 80.8222 20.714C81.1582 20.426 81.3262 20.036 81.3262 19.544V19.184C81.3262 18.68 81.1642 18.29 80.8402 18.014C80.5162 17.726 80.0362 17.582 79.4002 17.582C78.7642 17.582 78.2842 17.726 77.9602 18.014C77.6362 18.29 77.4742 18.68 77.4742 19.184V19.544C77.4742 20.036 77.6362 20.426 77.9602 20.714C78.2962 21.002 78.7762 21.146 79.4002 21.146ZM79.4002 15.602C80.0002 15.602 80.4562 15.464 80.7682 15.188C81.0802 14.912 81.2362 14.54 81.2362 14.072V13.802C81.2362 13.334 81.0742 12.968 80.7502 12.704C80.4382 12.428 79.9882 12.29 79.4002 12.29C78.8122 12.29 78.3562 12.428 78.0322 12.704C77.7202 12.968 77.5642 13.334 77.5642 13.802V14.072C77.5642 14.54 77.7202 14.912 78.0322 15.188C78.3442 15.464 78.8002 15.602 79.4002 15.602Z"
+            fill="#EFF0F3" />
+        </svg>
+        <span class="red-text">Expressão inválida </span>
+      </div>
+      <div class="comparison" style="margin-top: 2.4rem">
+        <span class="green-text">Expressão válida </span>
+        <svg viewBox="0 0 96 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left: auto;" >
+          <rect width="32" height="32" fill="#7F5AF0" />
+          <path
+            d="M16.102 23V20.588H10.45V18.284L15.454 10.436H18.694V18.5H20.314V20.588H18.694V23H16.102ZM12.628 18.5H16.102V13.226H15.94L12.628 18.5Z"
+            fill="#EFF0F3" />
+          <rect x="64" y="32" width="32" height="32" transform="rotate(-180 64 32)" fill="#2CB67D" />
+          <path
+            d="M57.5869 14.484L52.2409 17.31L52.2409 17.454L57.5869 20.28L57.5869 22.764L49.8469 18.624L49.8469 16.14L57.5869 12L57.5869 14.484Z"
+            fill="#EFF0F3" />
+          <path
+            d="M47.5679 18.39L47.5679 20.514L38.9999 20.514L38.9999 18.39L47.5679 18.39ZM47.5679 14.25L47.5679 16.374L38.9999 16.374L38.9999 14.25L47.5679 14.25Z"
+            fill="#EFF0F3" />
+          <rect x="64" width="32" height="32" fill="#7F5AF0" />
+          <path
+            d="M79.4002 23.216C78.6442 23.216 77.9722 23.126 77.3842 22.946C76.7962 22.754 76.2982 22.496 75.8902 22.172C75.4822 21.848 75.1702 21.464 74.9542 21.02C74.7502 20.564 74.6482 20.072 74.6482 19.544C74.6482 18.728 74.8822 18.074 75.3502 17.582C75.8182 17.078 76.4182 16.724 77.1502 16.52V16.376C76.5262 16.148 76.0162 15.8 75.6202 15.332C75.2242 14.864 75.0262 14.264 75.0262 13.532C75.0262 13.052 75.1222 12.608 75.3142 12.2C75.5062 11.792 75.7882 11.444 76.1602 11.156C76.5322 10.856 76.9882 10.628 77.5282 10.472C78.0682 10.304 78.6922 10.22 79.4002 10.22C80.0962 10.22 80.7142 10.304 81.2542 10.472C81.8062 10.628 82.2682 10.856 82.6402 11.156C83.0122 11.444 83.2942 11.792 83.4862 12.2C83.6782 12.608 83.7742 13.052 83.7742 13.532C83.7742 14.264 83.5762 14.864 83.1802 15.332C82.7842 15.8 82.2742 16.148 81.6502 16.376V16.52C82.3822 16.724 82.9822 17.078 83.4502 17.582C83.9182 18.074 84.1522 18.728 84.1522 19.544C84.1522 20.072 84.0442 20.564 83.8282 21.02C83.6242 21.464 83.3182 21.848 82.9102 22.172C82.5022 22.496 82.0042 22.754 81.4162 22.946C80.8282 23.126 80.1562 23.216 79.4002 23.216ZM79.4002 21.146C80.0242 21.146 80.4982 21.002 80.8222 20.714C81.1582 20.426 81.3262 20.036 81.3262 19.544V19.184C81.3262 18.68 81.1642 18.29 80.8402 18.014C80.5162 17.726 80.0362 17.582 79.4002 17.582C78.7642 17.582 78.2842 17.726 77.9602 18.014C77.6362 18.29 77.4742 18.68 77.4742 19.184V19.544C77.4742 20.036 77.6362 20.426 77.9602 20.714C78.2962 21.002 78.7762 21.146 79.4002 21.146ZM79.4002 15.602C80.0002 15.602 80.4562 15.464 80.7682 15.188C81.0802 14.912 81.2362 14.54 81.2362 14.072V13.802C81.2362 13.334 81.0742 12.968 80.7502 12.704C80.4382 12.428 79.9882 12.29 79.4002 12.29C78.8122 12.29 78.3562 12.428 78.0322 12.704C77.7202 12.968 77.5642 13.334 77.5642 13.802V14.072C77.5642 14.54 77.7202 14.912 78.0322 15.188C78.3442 15.464 78.8002 15.602 79.4002 15.602Z"
+            fill="#EFF0F3" />
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>Como comandar?</h2>
+      <p>
+        Para comandar os blocos, você pode utilizar os botões localizados na parte inferior da tela, ou então, utilizar as setas
+        direcionais, caso esteja no seu computador.
+      </p>
+      <svg viewBox="0 0 160 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 18.4rem; align-self: center">
+        <path d="M1.90798e-07 16L32 3.81596e-07L32 32L1.90798e-07 16Z" fill="#7F5AF0" />
+        <path d="M80 32L64 -8.9018e-07L96 1.90735e-06L80 32Z" fill="#7F5AF0" />
+        <path d="M160 16L128 32L128 -1.39876e-06L160 16Z" fill="#7F5AF0" />
+      </svg>
+    </section>
+
+    <section>
+      <h2>Pontuação!</h2>
+      <p>
+        Sua pontuação é calculada baseada nas expressões válidas que você consegue montar, sua pontuação é mostrada em tempo
+        real. Além disso, um ranking é construído para você comparar os seus recordes de pontuação, salvando até 10 pontuações.
+      </p>
+    </section>
+  
+    <section>
+      <h2>Colabore!</h2>
+      <p>
+        Quer ajudar no projeto? Acesse nosso repositório e ajude a tornar esse jogo mais divertido e criativo, reporte bugs
+        que
+        encontrou, ou então apenas analise como desenvolvemos o jogo. Sinta-se livre, o jogo é desenvolvido sobre a licença
+        MIT.
+      </p>
+      <a target="_blank" rel="noopener noreferrer" href="https://github.com/lucas427/matris">Repositório</a>
+    </section>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('../service-worker.js')
+        .then(reg => console.log('Service worker successfully installed 😍'))
+        .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
+    }
+  </script>
+
+</body>
+
+</html>

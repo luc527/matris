@@ -143,6 +143,8 @@ table {
 
 	/* Fonts */
 	--font-default: "IBM Plex Mono", monospace;
+
+	--width-default: 26rem;
 }
 
 html,
@@ -172,11 +174,11 @@ header {
 }
 
 header svg {
-	width: 26rem;
+	width: var(--width-default);
 }
 
 header nav {
-	width: 26rem;
+	width: var(--width-default);
 	margin-top: 2.4rem;
 	display: flex;
 	align-items: center;
@@ -195,7 +197,7 @@ header nav a svg {
 }
 
 footer {
-	width: 26rem;
+	width: var(--width-default);
 	display: flex;
 	justify-content: space-between;
 }
@@ -351,11 +353,6 @@ p#game-over {
 }
 
 @media (min-width: 768px) {
-	html,
-	body {
-		font-size: 75%; /* 1rem = 12px */
-	}
-
 	.modal {
 		align-items: center;
 	}
@@ -370,9 +367,9 @@ p#game-over {
 	}
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1440px) {
 	html,
 	body {
-		font-size: 85%; /* 1rem = 16px */
+		font-size: 85%;
 	}
 }
