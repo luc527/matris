@@ -42,12 +42,11 @@ function randomBalancedBlock(typeCount) {
 	return randomElement(blocks);
 }
 
-const operatorFunction = {
+const comparisonFunctions = {
 	">": (l, r) => l > r,
 	"<": (l, r) => l < r,
 	">=": (l, r) => l >= r,
 	"<=": (l, r) => l <= r,
-	"=": (l, r) => l == r,
 	"!=": (l, r) => l != r,
 };
 
@@ -55,5 +54,5 @@ function isTrueExpression(leftOperand, operator, rightOperand) {
 	const valid =
 		isNumber(leftOperand) && isComparison(operator) && isNumber(rightOperand);
 	if (!valid) return false;
-	return operatorFunction[operator](Number(leftOperand), Number(rightOperand));
+	return comparisonFunctions[operator](Number(leftOperand), Number(rightOperand));
 }
