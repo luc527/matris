@@ -10,7 +10,7 @@ function storeScore(score) {
 	if (score > 0) {
 		rankingScores.push(score);
 
-		rankingScores.sort((a,b) => b - a); //Sort numerically, in descending order 
+		rankingScores.sort((a, b) => b - a); //Sort numerically, in descending order
 
 		saveToStorage();
 	}
