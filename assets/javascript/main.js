@@ -22,7 +22,7 @@ function getType(block) {
 }
 
 /* function randomBlock() {
-  return randomElement(blocks);
+	return randomElement(blocks);
 } */
 
 /* randomBalancedBlock: given the amount of numbers and comparisons at the game,
@@ -44,12 +44,11 @@ function randomBalancedBlock(typeCount) {
 	return randomElement(blocks);
 }
 
-const operatorFunction = {
+const comparisonFunctions = {
 	">": (l, r) => l > r,
 	"<": (l, r) => l < r,
 	">=": (l, r) => l >= r,
 	"<=": (l, r) => l <= r,
-	"=": (l, r) => l == r,
 	"!=": (l, r) => l != r,
 };
 
@@ -57,8 +56,12 @@ function isTrueExpression(leftOperand, operator, rightOperand) {
 	const valid =
 		isNumber(leftOperand) && isComparison(operator) && isNumber(rightOperand);
 	if (!valid) return false;
-	return operatorFunction[operator](Number(leftOperand), Number(rightOperand));
+	return comparisonFunctions[operator](
+		Number(leftOperand),
+		Number(rightOperand)
+	);
 }
+
 /* dependencies:
  * Matrix.js
  * helpers.js (in createNewPlayerBlock)
@@ -178,7 +181,9 @@ class Game {
 		if (this.isGameOver()) return;
 
 		this.updatePlayerBlock(input);
-		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
+		if (this.isGameOver()) {
+			storeScore(this.score);
+		} else if (this.isPlayerBlockSettled()) {
 			this.updateScore();
 			this.createNewPlayerBlock();
 		}
@@ -187,17 +192,16 @@ class Game {
 	/* makeBlocksFall: applies gravity to the matrix,
 	 * blocks with empty spaces below will go down until reaching ground */
 	makeBlocksFall() {
-		let current = { y: null, x: null };
-
-		for (current.y = 0; current.y < this.matrix.height - 1; current.y++) {
-			for (current.x = 0; current.x < this.matrix.width; current.x++) {
-				if (this.matrix.getBlock(current) == " ") {
-					const above = {
-						y: current.y + 1,
-						x: current.x,
-					};
-					this.matrix.moveBlock(above, current);
-					// move from above to the current position (below)
+		let i = { y: null, x: null };
+		for (i.y = 1; i.y < this.matrix.height; i.y++) {
+			for (i.x = 0; i.x < this.matrix.width; i.x++) {
+				const below = { y: i.y - 1, x: i.x };
+				if (!this.matrix.isAvailable(i) && this.matrix.isAvailable(below)) {
+					//block at i is floating
+					let ground = { y: i.y - 1, x: i.x };
+					while (this.matrix.isAvailable(ground)) ground.y--;
+					ground.y++; //move block ABOVE ground, not IN the ground
+					this.matrix.moveBlock(i, ground);
 				}
 			}
 		}
@@ -342,12 +346,12 @@ class Game {
 		html += "</table>";
 		if (this.isGameOver() && this.gameOverModalShown === false) {
 			this.showGameOverModal();
-			addScore(this.score);
 		}
 
 		return html;
 	}
 }
+
 /* randomIntBetween: random integer in interval [min,max) */
 function randomIntBetween(min, max) {
 	return Math.floor(min + Math.random() * (max - min));
@@ -356,7 +360,9 @@ function randomIntBetween(min, max) {
 /* randomElement: returns a random element of the given array */
 function randomElement(arr) {
 	return arr[randomIntBetween(0, arr.length)];
-} /* dependencies:
+}
+
+/* dependencies:
    block-logic.js (in HTMLrendering())
 */
 
@@ -451,25 +457,24 @@ class Matrix {
 		return html;
 	}
 }
+
 let rankingScores = JSON.parse(localStorage.getItem("ranking_scores")) || [];
 
 if (rankingScores.length > 10) {
 	rankingScores.splice(-1, 1);
 }
 
-// ADD SCORE
+// STORE SCORE
 
-function addScore(score) {
+function storeScore(score) {
 	if (score > 0) {
 		rankingScores.push(score);
 
-		rankingScores.sort();
+		rankingScores.sort((a, b) => b - a); //Sort numerically, in descending order
 
 		saveToStorage();
 	}
 }
-
-// STORE SCORES
 
 function saveToStorage() {
 	localStorage.setItem("ranking_scores", JSON.stringify(rankingScores));

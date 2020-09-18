@@ -9,7 +9,6 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0" />
-  <meta name="theme-color" content="#eff0f3" />
 
   <!-- SEO Tags -->
   <meta name="description" content="Aprenda expressões matemáticas se divertindo." />
@@ -51,8 +50,10 @@
       font-style: normal;
     }
   </style>
+  
+  <meta name="theme-color" content="#eff0f3" />
 
-  <link rel="stylesheet" href="./assets/style/style.css">
+  <link rel="stylesheet" href="./assets/style/style.min.css">
 </head>
 <body>
 
@@ -125,11 +126,11 @@
 	
 	<script>
 
-    // if ('serviceWorker' in navigator) {
-    //   navigator.serviceWorker.register('./service-worker.js')
-    //     .then(reg => console.log('Service worker successfully installed 😍'))
-    //     .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
-    // }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(reg => console.log('Service worker successfully installed 😍'))
+        .catch(err => console.error('Something went wrong while trying to install the service worker 😢', err));
+    }
 
     window.onload = () => {
       setDocHeight(), init();
@@ -183,12 +184,7 @@
 
 	</script>
 
-  <!--<script src="assets/javascript/main.min.js" async></script>-->
-  <script src="assets/javascript/helpers.js" async></script>
-  <script src="assets/javascript/block-logic.js" async></script>
-  <script src="assets/javascript/Matrix.js" async></script>
-  <script src="assets/javascript/Game.js" async></script>
-  <script src="assets/javascript/ranking.js" async></script>
+  <script src="assets/javascript/main.min.js" async></script>
 	
 </body>
 </html>
