@@ -39,7 +39,6 @@ class Game {
 		return false;
 	}
 
-
 	/* blockTypeCount: returns a {numbers, comparisons} object with the
 	 * number of number blocks and comparison blocks on the matrix */
 	blockTypeCount() {
@@ -47,12 +46,12 @@ class Game {
 			numbers: 0,
 			comparisons: 0,
 		};
-		let i = { y:null, x:null };
+		let i = { y: null, x: null };
 		for (i.y = 0; i.y < this.matrix.height; i.y++)
 			for (i.x = 0; i.x < this.matrix.width; i.x++) {
 				const type = getType(this.matrix.getBlock(i));
-				if (type == 'number') c.numbers++;
-				else if (type == 'comparison') c.comparisons++;
+				if (type == "number") c.numbers++;
+				else if (type == "comparison") c.comparisons++;
 			}
 		return c;
 	}
@@ -64,7 +63,10 @@ class Game {
 			y: this.matrix.height - 1,
 			x: randomIntBetween(0, this.matrix.width),
 		};
-		this.matrix.setBlock(this.playerBlock, randomBalancedBlock(this.blockTypeCount()));
+		this.matrix.setBlock(
+			this.playerBlock,
+			randomBalancedBlock(this.blockTypeCount())
+		);
 	}
 
 	/* updatePlayerBlock: moves the playerBlock according
@@ -113,13 +115,25 @@ class Game {
 
 	update(input) {
 		if (this.isGameOver()) return;
+		if (this.isGameOver()) return;
 
 		this.updatePlayerBlock(input);
-		if (this.isGameOver()) {
-			storeScore(this.score);
-		} else if (this.isPlayerBlockSettled()) {
-			this.updateScore();
-			this.createNewPlayerBlock();
+		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
+			if (this.isGameOver()) {
+				storeScore(this.score);
+			} else if (this.isPlayerBlockSettled()) {
+				this.updateScore();
+				this.createNewPlayerBlock();
+				/* has to check for game over directly after createNewPlayerBlock
+         * because a player block may be created and settle on the red row immediatly,
+        /* has to also check for game over directly after createNewPlayerBlock
+         * because a player block may settle on the red row immediatly after it is created,
+         * which happens when the player makes a tower high enough */
+				if (this.isGameOver()) {
+					console.log(`Game over! Storing score of ${this.score}`);
+					if (this.isGameOver()) storeScore(this.score);
+				}
+			}
 		}
 	}
 
@@ -129,11 +143,11 @@ class Game {
 		let i = { y: null, x: null };
 		for (i.y = 1; i.y < this.matrix.height; i.y++) {
 			for (i.x = 0; i.x < this.matrix.width; i.x++) {
-				const below = { y:i.y-1, x:i.x };
-				if (!this.matrix.isAvailable(i) && this.matrix.isAvailable(below)) { //block at i is floating
-					let ground = { y:i.y-1, x:i.x };
-					while (this.matrix.isAvailable(ground))
-						ground.y--;
+				const below = { y: i.y - 1, x: i.x };
+				if (!this.matrix.isAvailable(i) && this.matrix.isAvailable(below)) {
+					//block at i is floating
+					let ground = { y: i.y - 1, x: i.x };
+					while (this.matrix.isAvailable(ground)) ground.y--;
 					ground.y++; //move block ABOVE ground, not IN the ground
 					this.matrix.moveBlock(i, ground);
 				}

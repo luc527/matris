@@ -1,6 +1,6 @@
 /* dependencies:
-   helpers.js (in randomBlock)
-*/
+    helpers.js (in randomBlock)
+  */
 
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const comparisons = ["!=", ">", "<", ">=", "<="];
@@ -22,8 +22,8 @@ function getType(block) {
 }
 
 /* function randomBlock() {
-	return randomElement(blocks);
-} */
+    return randomElement(blocks);
+  } */
 
 /* randomBalancedBlock: given the amount of numbers and comparisons at the game,
  * if the amount is balanced, just return a random block
@@ -61,7 +61,6 @@ function isTrueExpression(leftOperand, operator, rightOperand) {
 		Number(rightOperand)
 	);
 }
-
 /* dependencies:
  * Matrix.js
  * helpers.js (in createNewPlayerBlock)
@@ -179,13 +178,25 @@ class Game {
 
 	update(input) {
 		if (this.isGameOver()) return;
+		if (this.isGameOver()) return;
 
 		this.updatePlayerBlock(input);
-		if (this.isGameOver()) {
-			storeScore(this.score);
-		} else if (this.isPlayerBlockSettled()) {
-			this.updateScore();
-			this.createNewPlayerBlock();
+		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
+			if (this.isGameOver()) {
+				storeScore(this.score);
+			} else if (this.isPlayerBlockSettled()) {
+				this.updateScore();
+				this.createNewPlayerBlock();
+				/* has to check for game over directly after createNewPlayerBlock
+          * because a player block may be created and settle on the red row immediatly,
+          /* has to also check for game over directly after createNewPlayerBlock
+          * because a player block may settle on the red row immediatly after it is created,
+          * which happens when the player makes a tower high enough */
+				if (this.isGameOver()) {
+					console.log(`Game over! Storing score of ${this.score}`);
+					if (this.isGameOver()) storeScore(this.score);
+				}
+			}
 		}
 	}
 
@@ -309,16 +320,16 @@ class Game {
 
 	showGameOverModal() {
 		const html = `<div id="game-over-modal" class="modal">
-                      <div class="modal__container">
-                        <h2>Game over!</h2>
-                        <p>${
-													this.score > 0
-														? `Você fez ${this.score} pontos`
-														: "Você não pontuou"
-												}</p>
-                        <button type="button" title="Jogar novamente!" onclick="window.location.reload();">Jogar novamente!</button>
-                      </div>
-                    </div>`;
+                        <div class="modal__container">
+                          <h2>Game over!</h2>
+                          <p>${
+														this.score > 0
+															? `Você fez ${this.score} pontos`
+															: "Você não pontuou"
+													}</p>
+                          <button type="button" title="Jogar novamente!" onclick="window.location.reload();">Jogar novamente!</button>
+                        </div>
+                      </div>`;
 
 		document.body.insertAdjacentHTML("beforeend", html);
 		this.gameOverModalShown = true;
@@ -351,7 +362,6 @@ class Game {
 		return html;
 	}
 }
-
 /* randomIntBetween: random integer in interval [min,max) */
 function randomIntBetween(min, max) {
 	return Math.floor(min + Math.random() * (max - min));
@@ -360,11 +370,9 @@ function randomIntBetween(min, max) {
 /* randomElement: returns a random element of the given array */
 function randomElement(arr) {
 	return arr[randomIntBetween(0, arr.length)];
-}
-
-/* dependencies:
-   block-logic.js (in HTMLrendering())
-*/
+} /* dependencies:
+    block-logic.js (in HTMLrendering())
+  */
 
 class Matrix {
 	constructor(height, width) {
@@ -457,7 +465,6 @@ class Matrix {
 		return html;
 	}
 }
-
 let rankingScores = JSON.parse(localStorage.getItem("ranking_scores")) || [];
 
 if (rankingScores.length > 10) {
