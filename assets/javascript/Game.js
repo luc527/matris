@@ -115,11 +115,16 @@ class Game {
 		if (this.isGameOver()) return;
 
 		this.updatePlayerBlock(input);
-		if (this.isGameOver()) {
-			storeScore(this.score);
-		} else if (this.isPlayerBlockSettled()) {
+		if (!this.isGameOver() && this.isPlayerBlockSettled()) {
 			this.updateScore();
 			this.createNewPlayerBlock();
+			/* has to check for game over directly after createNewPlayerBlock
+			 * because a player block may be created and settle on the red row immediatly,
+			 * which happens when the player makes a tower high enough */
+			if (this.isGameOver()) {
+				console.log(`Game over! Storing score of ${this.score}`);
+				storeScore(this.score);
+			}
 		}
 	}
 
